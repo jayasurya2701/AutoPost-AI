@@ -24,7 +24,7 @@ else:
 
 # Main app layout
 def main():
-    st.subheader("🚀 LinkedIn Post Generator: JayaSurya")
+    st.subheader("🚀 AutoPost-AI : AI-Powered-LinkedIn-Post-Generator")
 
     # Create three columns for dropdowns
     col1, col2, col3 = st.columns(3)
