@@ -268,11 +268,10 @@ def correct_tanglish_spelling(text):
     "vayasu aayiduchu bro": "vayasu aaiduchu bro"",
 }
 
+for wrong, correct in corrections.items():
+    text = text.replace(wrong, correct)
     
-    for wrong, correct in corrections.items():
-        text = text.replace(wrong, correct)
-    
-    return text
+return text
 
 
 if __name__ == "__main__":
