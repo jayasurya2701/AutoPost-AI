@@ -1,13 +1,13 @@
 # AutoPost-AI : AI-Powered-LinkedIn-Post-Generator
 Write Smarter, Post Faster  🚀
 
-📌 Overview
+#📌 **Overview**
 AutoPost AI is an AI-driven LinkedIn post generator designed to help professionals, marketers, and businesses create engaging, high-quality content effortlessly. Built with Llama 3, LangChain, and Streamlit, this tool leverages LLM-powered content generation, few-shot learning, and metadata-based topic filtering to craft personalized LinkedIn posts with precise tone, structure, and relevance.
 
 With multi-language support, topic-specific customization, and optimized API performance, AutoPost AI ensures that users can generate posts quickly and effectively, making LinkedIn content creation faster, smarter, and more impactful.
 
 
-⚡ Key Features & Capabilities
+##⚡**Key Features & Capabilities**
 
 ✅ AI-Powered Content Generation – Generate LinkedIn posts by specifying a topic, language, and length.
 
@@ -24,7 +24,7 @@ With multi-language support, topic-specific customization, and optimized API per
 ✅ Robust Error Handling – Implements retry logic & exponential backoff to manage API rate limits effectively.
 
 
-📊 Tech Stack
+📊 **Tech Stack**
 
 LLM: Llama 3 (via Groq API)
 
@@ -35,7 +35,7 @@ Data Processing: Pandas, JSON
 Deployment & Environment Management: Python, dotenv
 
 
-🚀 How It Works
+🚀 **How It Works**
 
 1️⃣ Select a topic, language, and tone.
 
@@ -44,7 +44,7 @@ Deployment & Environment Management: Python, dotenv
 3️⃣ Review, refine (if needed), and publish instantly!
 
 
-🎯 Why Use AutoPost AI?
+🎯 **Why Use AutoPost AI?**
 
 ✅ Saves time – No need to manually brainstorm or write posts.
 
@@ -55,7 +55,7 @@ Deployment & Environment Management: Python, dotenv
 ✅ Supports multilingual content – Write in English, Tanglish, or other supported formats.
 
 
-▶️ Getting Started
+▶️ **Getting Started**
 
 Run the Application:
 
