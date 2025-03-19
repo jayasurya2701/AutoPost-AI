@@ -44,19 +44,25 @@ def get_prompt(length, language, tag):
 
         if i == 1: # Use max two samples
             break
-     # Special Handling for Tanglish: Provide Explicit Examples for Better Generation
+     # Improve Tanglish output by enforcing clear spelling rules
     if language.lower() == "tanglish":
         prompt += """
         
         5) Follow this Tanglish writing style strictly:
 
-        Example 1:  
+        ✅ Use simple, clear English words mixed with Tamil phrases.
+        ✅ Always spell Tamil words in the most **phonetic and readable way**.
+        ✅ **Avoid complex Tamil words** that don't transliterate well.
+        ✅ **Use natural conversational flow**, like how native speakers text.
+        ✅ **Maintain correct spelling and pronunciation**.
+
+        Example 1:
         "Job search vera level stress da! 😩  
         Call varuma nu wait panna, mail varuma nu check panna, last la ‘We regret to inform you’ nu oru mail.  
         Aana keep going! One rejection doesn’t define your future. Un effort kandippa result kudukum! 🔥  
         Oru naal, neeyum ‘We’re happy to offer you the position’ nu read pannuvey. 💪"
 
-        Example 2:  
+        Example 2:
         "Networking panna kastama iruku nu oru feeling. 😩  
         Aana bro, romba simple.  
         1. DM panna oru 'Hi' sollu.  
@@ -67,9 +73,7 @@ def get_prompt(length, language, tag):
         Now, generate a new LinkedIn post in the **same Tanglish style**, keeping spelling and pronunciation correct.
         """
 
-
     return prompt
-
 
 if __name__ == "__main__":
     print(generate_post("Medium", "English", "Mental Health"))
