@@ -61,6 +61,25 @@ Deployment & Environment Management: Python, dotenv
 
 ---
 
+## 🔗 Try the Live App
+
+🚀 Live Demo on Streamlit : https://autopost-ai.streamlit.app/
+
+---
+
+## 🔑 API Key Setup (Groq Cloud)
+To access Llama 3 via the Groq API, create your own LLM API key using Groq Cloud:
+
+1️⃣ Sign up on Groq Cloud and create an account.
+
+2️⃣ Navigate to the API Keys section and generate a new key.
+
+3️⃣ Store the API key in a particular place to use it   
+
+4️⃣ You're ready to run the app and start generating LinkedIn posts! 🚀
+
+---
+
 ### **Run the Application:**  
 To start using AutoPost AI, **run the following command:**  
 
