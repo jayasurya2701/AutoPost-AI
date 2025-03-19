@@ -6,8 +6,9 @@ AutoPost AI is an AI-driven LinkedIn post generator designed to help professiona
 
 With multi-language support, topic-specific customization, and optimized API performance, AutoPost AI ensures that users can generate posts quickly and effectively, making LinkedIn content creation faster, smarter, and more impactful.
 
+---
 
-##⚡**Key Features & Capabilities**
+## ⚡ **Key Features & Capabilities**  
 
 ✅ AI-Powered Content Generation – Generate LinkedIn posts by specifying a topic, language, and length.
 
