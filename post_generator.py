@@ -16,6 +16,11 @@ def get_length_str(length):
 def generate_post(length, language, tag):
     prompt = get_prompt(length, language, tag)
     response = llm.invoke(prompt)
+    
+    # Apply correction if the output is in Tanglish
+    if language.lower() == "tanglish":
+        return correct_tanglish_spelling(response.content)
+    
     return response.content
 
 
