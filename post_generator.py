@@ -44,6 +44,29 @@ def get_prompt(length, language, tag):
 
         if i == 1: # Use max two samples
             break
+     # Special Handling for Tanglish: Provide Explicit Examples for Better Generation
+    if language.lower() == "tanglish":
+        prompt += """
+        
+        5) Follow this Tanglish writing style strictly:
+
+        Example 1:  
+        "Job search vera level stress da! 😩  
+        Call varuma nu wait panna, mail varuma nu check panna, last la ‘We regret to inform you’ nu oru mail.  
+        Aana keep going! One rejection doesn’t define your future. Un effort kandippa result kudukum! 🔥  
+        Oru naal, neeyum ‘We’re happy to offer you the position’ nu read pannuvey. 💪"
+
+        Example 2:  
+        "Networking panna kastama iruku nu oru feeling. 😩  
+        Aana bro, romba simple.  
+        1. DM panna oru 'Hi' sollu.  
+        2. Interest iruka field la leaders oda post la engage pannu.  
+        3. Calls, webinars la participate pannu.  
+        Oru naal unga name therinja, opportunities varum. 🚀"
+
+        Now, generate a new LinkedIn post in the **same Tanglish style**, keeping spelling and pronunciation correct.
+        """
+
 
     return prompt
 
