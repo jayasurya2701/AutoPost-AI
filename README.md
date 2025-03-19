@@ -24,8 +24,9 @@ With multi-language support, topic-specific customization, and optimized API per
 
 ✅ Robust Error Handling – Implements retry logic & exponential backoff to manage API rate limits effectively.
 
+---
 
-📊 **Tech Stack**
+## 📊 **Tech Stack**  
 
 LLM: Llama 3 (via Groq API)
 
@@ -35,8 +36,9 @@ Data Processing: Pandas, JSON
 
 Deployment & Environment Management: Python, dotenv
 
+---
 
-🚀 **How It Works**
+## 🚀 **How It Works**  
 
 1️⃣ Select a topic, language, and tone.
 
@@ -44,8 +46,9 @@ Deployment & Environment Management: Python, dotenv
 
 3️⃣ Review, refine (if needed), and publish instantly!
 
+---
 
-🎯 **Why Use AutoPost AI?**
+## 🎯 **Why Use AutoPost AI?**  
 
 ✅ Saves time – No need to manually brainstorm or write posts.
 
@@ -55,13 +58,12 @@ Deployment & Environment Management: Python, dotenv
 
 ✅ Supports multilingual content – Write in English, Tanglish, or other supported formats.
 
+---
 
-▶️ **Getting Started**
+### **Run the Application:**  
+To start using AutoPost AI, **run the following command:**  
 
-Run the Application:
-
-To start using AutoPost AI, run the following command:
-
-                                        python main.py
+```bash
+python main.py
 
 This will launch the Streamlit UI, where you can generate LinkedIn posts instantly!
