@@ -17,14 +17,16 @@ def get_length_str(length):
 
 
 def generate_post(length, language, tag):
+    from preprocess import correct_tanglish_spelling  # Lazy import
+
     prompt = get_prompt(length, language, tag)
     response = llm.invoke(prompt)
-    
-    # Apply Tanglish spelling correction if language is Tanglish
+
     if language.lower() == "tanglish":
         return correct_tanglish_spelling(response.content)
-    
+
     return response.content
+
 
 
 def get_prompt(length, language, tag):
