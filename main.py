@@ -304,7 +304,7 @@ def main():
 
     # Ensure session state has valid keys
     if "selected_category" not in st.session_state:
-        st.session_state["selected_category"] = next(iter(professions.keys()))  # First valid category
+        st.session_state["selected_category"] = "Technical"
 
     if "selected_subcategory" not in st.session_state:
         st.session_state["selected_subcategory"] = ""
@@ -316,54 +316,38 @@ def main():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        selected_category = st.selectbox(
-            "📂 Select Category:", 
-            options=list(professions.keys()),  
-            index=list(professions.keys()).index(st.session_state["selected_category"])
-        )
-        st.session_state["selected_category"] = selected_category  # Update session state
+        selected_category = st.selectbox("📂 Select Category:", options=list(professions.keys()))
+        st.session_state["selected_category"] = selected_category
 
     # **Handling "Personal Growth" category separately**
     if selected_category == "Personal Growth":
         topics = list(professions[selected_category].keys())
         selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
         selected_language = st.selectbox("📝 Select Language:", options=language_options)
-        
-        # **Why This Post is Generated**
         selected_reason = st.selectbox("🤔 Why is this post generated?", options=post_reasons)
 
         col4, col5 = st.columns([1, 3])
         with col4:
             selected_length = st.radio("📏 Select Post Length:", options=length_options, horizontal=True)
         with col5:
-            custom_keywords = st.text_input("🔑 Add Specific Keywords (Optional)", help="Enter keywords to fine-tune the generated post.")
+            custom_keywords = st.text_input("🔑 Add Specific Keywords (Optional)")
 
-        # Generate Post Button
         if st.button("⚡ Generate Post"):
             post = generate_post(selected_length, selected_language, selected_topic, "Personal Growth", custom_keywords, selected_reason)
             st.write(post)
-        return  # Exit function early since subcategory/profession is not needed
+        return
 
     # **For other categories (Technical, Business, etc.)**
     with col2:
-        subcategories = list(professions[selected_category].keys())  # Get valid subcategories
-        selected_subcategory = st.selectbox(
-            "📁 Select Subcategory:", 
-            options=subcategories,
-            index=subcategories.index(st.session_state["selected_subcategory"]) if st.session_state["selected_subcategory"] in subcategories else 0
-        )
-        st.session_state["selected_subcategory"] = selected_subcategory  # Update session state
+        subcategories = list(professions[selected_category].keys())
+        selected_subcategory = st.selectbox("📁 Select Subcategory:", options=subcategories)
+        st.session_state["selected_subcategory"] = selected_subcategory
 
     with col3:
         professions_list = list(professions[selected_category][selected_subcategory].keys()) if selected_subcategory in professions[selected_category] else []
-        selected_profession = st.selectbox(
-            "💼 Select Your Profession:", 
-            options=professions_list,
-            index=professions_list.index(st.session_state["selected_profession"]) if st.session_state["selected_profession"] in professions_list else 0
-        )
-        st.session_state["selected_profession"] = selected_profession  # Update session state
+        selected_profession = st.selectbox("💼 Select Your Profession:", options=professions_list)
+        st.session_state["selected_profession"] = selected_profession
 
-    # Align topic & language selections in one row for clarity
     col4, col5 = st.columns(2)
 
     with col4:
@@ -373,19 +357,8 @@ def main():
     with col5:
         selected_language = st.selectbox("📝 Select Language:", options=language_options)
 
-    # **Why This Post is Generated**
     selected_reason = st.selectbox("🤔 Why is this post generated?", options=post_reasons)
 
-    # Length & Keywords - Aligned Horizontally
-    col6, col7 = st.columns([1, 3])
-
-    with col6:
-        selected_length = st.radio("📏 Select Post Length:", options=length_options, horizontal=True)
-
-    with col7:
-        custom_keywords = st.text_input("🔑 Add Specific Keywords (Optional)", help="Enter keywords to fine-tune the generated post.")
-
-    # Generate Post Button
     if st.button("⚡ Generate Post"):
         post = generate_post(selected_length, selected_language, selected_topic, selected_profession, custom_keywords, selected_reason)
         st.write(post)
