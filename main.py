@@ -17,25 +17,11 @@ if user_api_key:
 else:
     st.sidebar.warning("⚠️ Please enter your API key to generate posts.")
 
-# 🎯 AI Chatbot Topics
-chatbot_topics = {
-    "Motivation": ["Career growth", "Perseverance", "Success mindset", "Overcoming self-doubt"],
-    "Mental Health": ["Stress management", "Work-life balance", "Handling anxiety"],
-    "Networking": ["Building connections", "Engaging with professionals", "Personal branding"],
-    "Self Improvement": ["Learning new skills", "Time management", "Confidence building"],
-    "Rejections": ["Overcoming failures", "Job search setbacks", "Resilience"],
-    "Workplace Success": ["Excelling at work", "Standing out in workplace", "Asking for a raise"],
-    "Leadership & Growth": ["Becoming a leader", "Decision-making skills", "Inspiring others"],
-    "Entrepreneurship": ["Starting a business", "Side hustles", "Scaling a startup"],
-    "Productivity": ["How to work smarter", "Best productivity hacks", "Morning routines"],
-    "Happiness & Fulfillment": ["Finding happiness at work", "Staying positive", "The power of gratitude"],
-}
-
 # 🏆 Profession categories & topics
 professions = {
     "Technical": {
         "IT & Software Development": {
-            "Software Developer": ["Coding", "Debugging", "Software Architecture"],
+            "Software Developer": ["Coding", "Debugging", "Software Architecture","General Thoughts"],
             "Full Stack Developer": ["Frontend", "Backend", "APIs"],
             "Mobile App Developer": ["iOS", "Android", "Flutter"],
             "Game Developer": ["Unity", "Unreal Engine", "Game AI"],
