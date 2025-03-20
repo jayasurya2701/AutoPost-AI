@@ -385,3 +385,4 @@ def main():
         st.write(post)
 
 if __name__ == "__main__":
+    main()
