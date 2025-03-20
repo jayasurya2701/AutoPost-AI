@@ -1,4 +1,4 @@
-# AutoPost-AI : AI-Powered-LinkedIn-Post-Generator
+# AutoPost-AI : An AI-Powered-LinkedIn-Post-Generator
 Write Smarter, Post Faster  🚀
 
 ## 📌 **Overview**  
