@@ -17,6 +17,9 @@ if user_api_key:
 else:
     st.sidebar.warning("⚠️ Please enter your API key to generate posts.")
 
+# ✅ Define options **before usage** to prevent NameError
+length_options = ["Short", "Medium", "Long"]
+language_options = ["English", "Tanglish"]
 
 # 🏆 Profession categories & topics
 professions = {
@@ -285,4 +288,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
