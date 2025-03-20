@@ -27,7 +27,7 @@ if not api_key:
 
 # Initialize LLM with error handling
 try:
-    llm = ChatGroq(groq_api_key=api_key, model_name="qwen-2.5-32B")
+    llm = ChatGroq(groq_api_key=api_key, model_name="llama3-8b-8192")
 except Exception as e:
     st.error(f"❌ Failed to connect to Groq API: {e}")
     st.stop()
