@@ -16,17 +16,17 @@ def get_length_str(length):
 
 def generate_post(post_length, language, topic, profession, post_reason, custom_keywords=""):
     """
-    Generates a LinkedIn post based on user inputs.
+    Generates a highly personalized LinkedIn post based on user inputs.
 
     - **post_length**: Short, Medium, or Long
     - **language**: English or Tanglish
     - **topic**: The subject of the post
     - **profession**: User's selected profession
-    - **post_reason**: The purpose of the post (e.g., "Completed a Course", "Landed a New Job")
+    - **post_reason**: The purpose of the post (e.g., "Got a Promotion", "Completed a Course")
     - **custom_keywords**: Additional keywords to fine-tune the post
 
     Returns:
-        A unique LinkedIn post as a string.
+        A **unique, personalized LinkedIn post** as a string.
     """
 
     # ✅ Prevent Empty Inputs
@@ -39,94 +39,25 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
 
     length_str = get_length_str(post_length)
 
-    # **Dynamically Varying Prompts Based on Purpose**
-    prompt_variations = {
-        "Completed a Course": [
-            f"""
-            🎓 **Generate a professional, insightful LinkedIn post celebrating course completion.**
-            
-            📚 **Course Accomplished**: {topic}
-            💼 **Profession**: {profession}
-            📏 **Post Length**: {length_str}
-            🔍 **Key Learnings & Takeaways**: {custom_keywords if custom_keywords else "None"}
+    # ✅ **Craft a dynamic prompt based on user selection**
+    prompt = f"""
+    ✨ **Create a LinkedIn post that is unique, engaging, and deeply personal.**
+    
+    🏆 **User Milestone**: {post_reason}
+    💼 **Profession**: {profession}
+    🔹 **Topic**: {topic}
+    📏 **Length**: {length_str}
+    🔑 **Extra Details**: {custom_keywords if custom_keywords else "None"}
 
-            🎯 **Guidelines**:
-            - Highlight **key takeaways** from the course.
-            - Express excitement for **what's next** (future learning/career application).
-            - If **Tanglish**, mix Tamil & English fluently.
-            """,
-            
-            f"""
-            🎉 **I just completed a course!** 🚀
+    🎯 **What the post should convey**:
+    - The user should sound **authentic, confident, and proud**.
+    - It should feel **natural, engaging, and emotionally relatable**.
+    - No overused phrases—make it **fresh, human-like, and inspiring**.
+    - If **Tanglish**, use a smooth mix of Tamil+English in English script.
+    """
 
-            ✅ **Course**: {topic}  
-            💼 **My Profession**: {profession}  
-            📏 **Post Length**: {length_str}  
-            🔑 **Extra Insights**: {custom_keywords if custom_keywords else "None"}
-
-            🔥 **Key Learnings**:
-            - What did I find most exciting?
-            - How will this course impact my career?
-            - What’s my next step?
-
-            Let's celebrate achievements & keep learning together! 🚀
-            """
-        ],
-        "Landed a New Job": [
-            f"""
-            🚀 **Big Career Update!**
-            
-            🎉 I’m thrilled to announce that I’ve just landed a new job as a **{profession}**! 
-
-            Over the past months, I have worked hard on {topic}, and now I finally have the chance to apply my skills in a professional setting. 
-
-            Looking forward to this exciting new journey! 🚀
-            """,
-
-            f"""
-            💼 **New Beginnings!**  
-
-            I’m excited to start my new role as a **{profession}**! My journey in {topic} has been an incredible learning experience, and I can’t wait to contribute my skills.  
-
-            **What’s next?**  
-            - 🚀 Growing as a {profession}  
-            - 🎯 Building expertise in {topic}  
-            - 🤝 Connecting with amazing professionals
-
-            If you’re in {topic}, let’s connect and grow together! #Networking
-            """
-        ]
-    }
-
-    # ✅ Choose a random prompt variation
-    prompt = random.choice(prompt_variations.get(post_reason, [
-        f"""
-        🎯 **Create a LinkedIn post that is professional, inspiring, and engaging.**
-        
-        🏆 **Post Context**: {post_reason}
-        💼 **Profession**: {profession}
-        🔹 **Topic**: {topic}
-        📏 **Length**: {length_str}
-        🔑 **Custom Keywords**: {custom_keywords if custom_keywords else "None"}
-        
-        📝 **Guidelines**:
-        - The tone should match the excitement of the user's milestone.
-        - Avoid generic phrases. The post should be **authentic, engaging, and unique**.
-        - If **Tanglish**, mix Tamil and English naturally (English script).
-        """
-    ]))
-
+    # ✅ **Generate post using LLM**
     try:
-        # ✅ Retrieve relevant example posts
-        examples = few_shot.get_filtered_posts(post_length, language, topic)
-        if examples:
-            prompt += "\n\n📌 **Example Writing Styles:**"
-            for i, post in enumerate(examples):
-                prompt += f"\n\n**Example {i+1}:**\n{post['text']}"
-                if i == 1:  # Limit to two examples
-                    break
-
-        # ✅ Generate post using LLM
         response = llm.generate(prompt)
 
         # ✅ Handle empty or invalid response
@@ -140,64 +71,117 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
         return response
 
     except Exception:
-        # ✅ Fallback post in case of any LLM failure
         return generate_fallback_post(topic, profession, post_reason, post_length, language)
 
 
 def generate_fallback_post(topic, profession, post_reason, post_length, language):
     """
-    Generates a fallback post when LLM fails.
+    Generates a **fallback post** when LLM fails.
     
-    - Uses a structured manual format to ensure users still get a useful post.
-    - Tanglish posts are generated manually to ensure natural language flow.
+    - Uses a **context-aware format** to ensure a **useful and meaningful** post.
+    - Tanglish posts **sound natural** and not robotic.
     """
 
     length_str = get_length_str(post_length)
 
-    english_fallback_templates = [
-        f"""
-        🎉 Big news! I just {post_reason.lower()} in **{topic}** as a **{profession}**. 
+    # ✅ **Dynamic fallback content generation (No fixed templates)**
+    if post_reason == "Got a Promotion":
+        english_fallbacks = [
+            f"""
+            🚀 Exciting news! I’m incredibly grateful to have been **promoted as a {profession}** in the field of {topic}!
 
-        This journey has been challenging yet rewarding. The insights I gained from {topic} are invaluable, and I'm eager to apply them in real-world projects. 
+            This journey has been filled with challenges, learning, and growth. Looking forward to taking on **new responsibilities and contributing even more**.
 
-        Looking forward to learning more and connecting with like-minded professionals. Let’s grow together! 🚀 #CareerGrowth""",
+            Huge thanks to my mentors, colleagues, and everyone who supported me! On to the next chapter! 🚀 #CareerGrowth #Promotion
+            """,
 
-        f"""
-        🔥 Exciting milestone! As a **{profession}**, I’ve recently {post_reason.lower()} in **{topic}**. 
+            f"""
+            🌟 A new milestone unlocked! 
 
-        This experience has deepened my knowledge, and I can’t wait to contribute more to this field. 
+            Thrilled to share that I’ve been **promoted as a {profession}**, marking a significant step in my journey in {topic}.
 
-        If you're also passionate about {topic}, let's connect and exchange ideas! 💡 #Networking""",
+            Hard work, persistence, and passion always pay off! Excited to keep learning and contributing. 🚀 #Success #NewRole
+            """
+        ]
 
-        f"""
-        🚀 Feeling proud! I’ve just {post_reason.lower()} in **{topic}**, marking a major step in my journey as a **{profession}**. 
+        tanglish_fallbacks = [
+            f"""
+            🔥 Vera level update! **Naan inime {profession} role ku promote aayiten!** 🚀
 
-        Every day is a learning opportunity, and I’m excited about what’s next. 
+            **{topic}** la romba kashtapattu work panniten, ipo oru periya milestone reach panniten.  
+            **Hard work, patience, and learning** – ithanoda key!  
 
-        Who else is exploring {topic}? Let’s discuss! 🌱 #Learning"""
-    ]
+            Neenga ellarum en support pannitinga, nandri! ❤️ #CareerGrowth
+            """,
 
-    tanglish_fallback_templates = [
-        f"""
-        🎉 Vera level update! **Naan {topic} la oru periya step eduthiruken** as a **{profession}**!  
+            f"""
+            🎉 Semma happy moment!  
 
-        **{post_reason}** panna romba kashtam, aana super experience ah irundhuchu. Innum nariya kathukanum nu feel pannuren.  
+            **En promotion** vandhachu! 😍 **{profession}** role ku elevate aayiten in {topic}.  
 
-        **Ungaloda experience enna?** Let’s connect! 🚀 #Networking""",
+            Challenges irundhalum, **kadaisi varaikum nambikkai irundhuchu** – ipo ithu result!  
+            Let’s all grow together! 🚀 #Success #Promotion
+            """
+        ]
 
-        f"""
-        🔥 Semma proud moment! **Naan {topic} pathi deep ah kathukiten** as a **{profession}**.  
+    elif post_reason == "Completed a Course":
+        english_fallbacks = [
+            f"""
+            🎓 Just completed a deep-dive into **{topic}**! 
 
-        **{post_reason}** panna vera level feel! Innum nalla improve aaganum nu wait pannitu iruken.  
+            As a **{profession}**, continuous learning is essential, and this course gave me incredible insights.  
+            Looking forward to **applying these skills** in real-world projects. 🚀  
 
-        **Neenga enna nenekreenga? Let's discuss!** 💡 #CareerGrowth""",
+            **Have you taken any interesting courses lately? Let’s discuss!** 👇 #Learning #Upskilling
+            """,
 
-        f"""
-        🚀 Enna oru journey! **{topic} la periya growth achieve panniten** as a **{profession}**.  
+            f"""
+            📚 Learning never stops!  
 
-        **{post_reason}** nu solla super happy ah iruken. Innum nariya updates share pannuren!  
+            Thrilled to share that I’ve successfully **completed a course on {topic}**.  
+            Every new skill learned is a step forward. Excited to implement these insights in my role as a **{profession}**! 🚀  
 
-        **Let’s connect and grow together!** 🌱 #Networking"""
-    ]
+            **What’s the best course you’ve ever taken? Drop your recommendations!** 👇 #CareerGrowth
+            """
+        ]
 
-    return random.choice(tanglish_fallback_templates) if language == "Tanglish" else random.choice(english_fallback_templates)
+        tanglish_fallbacks = [
+            f"""
+            📚 Vera level course complete panniten!  
+
+            **{topic}** pathi **deep ah study pannitu** ipo confidence ah iruken.  
+            **Learning never stops da!** Ithoda next step apply pannitu, innum periya level ku poganum! 🚀  
+
+            **Neenga ethavathu course complete panna experience share pannunga!** #Growth #Learning
+            """,
+
+            f"""
+            🎉 Course complete agiduchu!  
+
+            **{topic}** la periya learning eduthen.  
+            **{profession}** ah irukura oruthanuku knowledge growth romba mukkiyam.  
+            Naan next level la povathuku ready! 🔥  
+
+            **Neenga enna course recommend pannuringa? Comment pannunga!** #Upskilling
+            """
+        ]
+
+    else:
+        english_fallbacks = [
+            f"""
+            🚀 Big milestone achieved! Just took a step forward in my career as a **{profession}** in {topic}.  
+            Every journey has its challenges, but growth comes from pushing through.  
+
+            Excited for what’s next! Let’s connect and share insights. 💡 #CareerGrowth #Networking
+            """
+        ]
+
+        tanglish_fallbacks = [
+            f"""
+            🔥 Periya milestone! **Naan {topic} la oru periya step eduthiruken** as a {profession}.  
+            **Life la ellame oru learning dhaan!** Innum nalla improve aaganum nu nenekiren! 🚀  
+            **Neenga enna nenekreenga? Let's discuss!** 💡 #CareerGrowth
+            """
+        ]
+
+    return random.choice(tanglish_fallbacks) if language == "Tanglish" else random.choice(english_fallbacks)
