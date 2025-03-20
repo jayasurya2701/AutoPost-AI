@@ -26,33 +26,47 @@ def generate_post(post_length, language, topic, profession, custom_keywords="", 
     - **post_reason**: Context for why this post is being generated
 
     Returns:
-        A generated LinkedIn post as a string.
+        A generated LinkedIn post as a string or an error message.
     """
+
+    # ✅ Prevent Empty Inputs
+    if not topic:
+        return "⚠️ Error: Topic is missing!"
+    if not profession:
+        return "⚠️ Error: Profession is missing!"
 
     length_str = get_length_str(post_length)
 
     prompt = f"""
-    📌 **Generate a professional and engaging LinkedIn post.**  
-    🎯 **Post Context**: {post_reason}  
+    🎯 **Generate a professional, engaging LinkedIn post.**  
+    🏆 **Post Context**: {post_reason}  
     💼 **Profession**: {profession}  
     🔹 **Topic**: {topic}  
     📏 **Length**: {length_str}  
     🔑 **Custom Keywords**: {custom_keywords if custom_keywords else "None"}  
 
-    📢 **Guidelines**:
-    - Ensure the tone is **engaging, professional, and relatable**.
-    - If language is **Tanglish**, mix Tamil and English but keep readability in **English script**.
-    - The post should be **authentic**, valuable, and suitable for LinkedIn.
+    📝 **Guidelines**:
+    - Keep the post **engaging, professional, and insightful**.
+    - If **Tanglish**, mix Tamil and English but maintain readability in **English script**.
+    - The post should be **authentic and valuable** to the audience.
     """
 
-    # Generate post using LLM (assuming `llm.generate` exists)
-    response = llm.generate(prompt)
+    try:
+        # ✅ Generate post using LLM
+        response = llm.generate(prompt)
 
-    # Correct spelling for Tanglish (if applicable)
-    if language == "Tanglish":
-        response = correct_tanglish_spelling(response)
+        # ✅ Handle empty response
+        if not response:
+            return "⚠️ Error: No response received from LLM!"
 
-    return response
+        # ✅ Apply Tanglish Spelling Correction (if needed)
+        if language == "Tanglish":
+            response = correct_tanglish_spelling(response)
+
+        return response
+
+    except Exception as e:
+        return f"⚠️ Error generating post: {str(e)}"
 
 
 def get_prompt(length, language, tag, profession, keywords):
@@ -72,28 +86,26 @@ def get_prompt(length, language, tag, profession, keywords):
     length_str = get_length_str(length)
 
     prompt = f"""
-    📌 **Generate a LinkedIn post based on the following details**:
+    🎯 **Generate a LinkedIn post based on the following details**:
 
-    1️⃣ **Topic**: {tag}
-    2️⃣ **Length**: {length_str}
-    3️⃣ **Language**: {language}
-    4️⃣ **Profession**: {profession}
-    5️⃣ **Custom Keywords**: {keywords if keywords else "None"}
+    🔹 **Topic**: {tag}
+    📏 **Length**: {length_str}
+    🌍 **Language**: {language}
+    💼 **Profession**: {profession}
+    🔑 **Custom Keywords**: {keywords if keywords else "None"}
 
-    📢 **Guidelines**:
-    - Keep the post **engaging, professional, and insightful**.
+    📝 **Guidelines**:
+    - Ensure the post is **engaging, professional, and insightful**.
     - If **Tanglish**, mix Tamil and English while maintaining readability in **English script**.
     - The post should be **thought-provoking and relatable**.
-    
-    ---
     """
 
     # Retrieve relevant example posts
     examples = few_shot.get_filtered_posts(length, language, tag)
 
     if examples:
-        prompt += "📌 **Example Writing Style**:\n"
-    
+        prompt += "\n\n📌 **Example Writing Style**:\n"
+
     for i, post in enumerate(examples):
         post_text = post["text"]
         prompt += f"\n\n**Example {i+1}:**\n{post_text}"
