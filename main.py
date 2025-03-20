@@ -170,99 +170,75 @@ professions = {
     }
 }
 
+length_options = ["Short", "Medium", "Long"]
+language_options = ["English", "Tanglish"]
+
 def main():
-    # 🎯 **UI Layout: Clean & Organized**
-    col1, col2 = st.columns([2, 1])
+    st.subheader("🚀 LinkedIn Post Generator")
+    fs = FewShotPosts()
 
-    ### **🚀 LinkedIn Post Generator - Left Column**
+    # Maintain state for selections
+    if "selected_category" not in st.session_state:
+        st.session_state["selected_category"] = list(professions.keys())[0]
+
+    if "selected_subcategory" not in st.session_state:
+        st.session_state["selected_subcategory"] = list(professions[st.session_state["selected_category"]].keys())[0]
+
+    if "selected_profession" not in st.session_state:
+        st.session_state["selected_profession"] = list(professions[st.session_state["selected_category"]][st.session_state["selected_subcategory"]].keys())[0]
+
+    # 🔹 **Horizontal Layout for User-Friendly Experience**
+    col1, col2, col3 = st.columns(3)
+    
     with col1:
-        st.markdown("### 🚀 **LinkedIn Post Generator**")
-        st.markdown("*Craft engaging posts tailored to your profession!*")
+        selected_category = st.selectbox(
+            "📂 Select Category:", 
+            options=professions.keys(),
+            index=list(professions.keys()).index(st.session_state["selected_category"])
+        )
+        st.session_state["selected_category"] = selected_category  # Update state
 
-        fs = FewShotPosts()
+    with col2:
+        subcategories = list(professions[selected_category].keys())
+        selected_subcategory = st.selectbox(
+            "📁 Select Subcategory:", 
+            options=subcategories,
+            index=subcategories.index(st.session_state["selected_subcategory"]) if st.session_state["selected_subcategory"] in subcategories else 0
+        )
+        st.session_state["selected_subcategory"] = selected_subcategory  # Update state
 
-        # Maintain user state
-        if "selected_category" not in st.session_state:
-            st.session_state["selected_category"] = list(professions.keys())[0]
+    with col3:
+        professions_list = list(professions[selected_category][selected_subcategory].keys())
+        selected_profession = st.selectbox(
+            "💼 Select Your Profession:", 
+            options=professions_list,
+            index=professions_list.index(st.session_state["selected_profession"]) if st.session_state["selected_profession"] in professions_list else 0
+        )
+        st.session_state["selected_profession"] = selected_profession  # Update state
 
-        if "selected_subcategory" not in st.session_state:
-            st.session_state["selected_subcategory"] = list(professions[st.session_state["selected_category"]].keys())[0]
+    # **Align topic & language selections in one row for clarity**
+    col4, col5 = st.columns(2)
+    
+    with col4:
+        topics = professions[selected_category][selected_subcategory][selected_profession]
+        selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
+    
+    with col5:
+        selected_language = st.selectbox("📝 Select Language:", options=language_options)
 
-        if "selected_profession" not in st.session_state:
-            st.session_state["selected_profession"] = list(professions[st.session_state["selected_category"]][st.session_state["selected_subcategory"]].keys())[0]
+    # **Length & Keywords - Aligned Horizontally**
+    col6, col7 = st.columns([1, 3])
+    
+    with col6:
+        selected_length = st.radio("📏 Select Post Length:", options=length_options, horizontal=True)
+    
+    with col7:
+        custom_keywords = st.text_input("🔑 Add Specific Keywords (Optional)", help="Enter keywords to fine-tune the generated post.")
 
-        # 🔹 **User-Friendly Horizontal Layout**
-        colA, colB, colC = st.columns(3)
-
-        with colA:
-            selected_category = st.selectbox(
-                "📂 **Select Category**", 
-                options=professions.keys(),
-                index=list(professions.keys()).index(st.session_state["selected_category"])
-            )
-            st.session_state["selected_category"] = selected_category
-
-        with colB:
-            subcategories = list(professions[selected_category].keys())
-            selected_subcategory = st.selectbox(
-                "📁 **Select Subcategory**", 
-                options=subcategories,
-                index=subcategories.index(st.session_state["selected_subcategory"]) if st.session_state["selected_subcategory"] in subcategories else 0
-            )
-            st.session_state["selected_subcategory"] = selected_subcategory
-
-        with colC:
-            professions_list = list(professions[selected_category][selected_subcategory].keys())
-            selected_profession = st.selectbox(
-                "💼 **Select Your Profession**", 
-                options=professions_list,
-                index=professions_list.index(st.session_state["selected_profession"]) if st.session_state["selected_profession"] in professions_list else 0
-            )
-            st.session_state["selected_profession"] = selected_profession
-
-        # **Topic & Language Selection**
-        colD, colE = st.columns(2)
-
-        with colD:
-            topics = professions[selected_category][selected_subcategory][selected_profession]
-            selected_topic = st.selectbox("🎯 **Discussion Topic**", options=topics)
-
-        with colE:
-            selected_language = st.selectbox("📝 **Select Language**", options=["English", "Tanglish"])
-
-        # **Post Length & Keywords**
-        colF, colG = st.columns([1, 3])
-
-        with colF:
-            selected_length = st.radio("📏 **Post Length**", options=["Short", "Medium", "Long"], horizontal=True)
-
-        with colG:
-            custom_keywords = st.text_input("🔑 **Custom Keywords (Optional)**", help="Enter keywords for fine-tuning.")
-
-        # **Generate Post**
-        if st.button("⚡ **Generate Post**", key="generate_post_button"):
-            post = generate_post(selected_length, selected_language, selected_topic, selected_profession, custom_keywords)
-            st.success("🎉 **Post Generated!**")
-            st.markdown(f"📝 **Your Post:**\n\n{post}")
-
-    # 💡 **Floating Chatbot Button**
-    chatbot_open = st.sidebar.button("🤖 Open InspireBot")
-
-    if chatbot_open:
-        st.sidebar.subheader("💡 InspireBot - AI Career Chatbot")
-        selected_chatbot_topic = st.sidebar.selectbox("🧠 **Choose a Topic**", options=chatbot_topics.keys())
-
-        # **Generate Response**
-        if st.sidebar.button("✨ Get Career Insights"):
-            insights = f"🔹 {selected_chatbot_topic}: {', '.join(chatbot_topics[selected_chatbot_topic][:3])}..."
-            st.sidebar.info(insights)
-
-        # **User Input for Custom Chat**
-        user_query = st.sidebar.text_input("💬 **Ask InspireBot**")
-
-        if st.sidebar.button("🚀 Get AI Advice"):
-            chatbot_response = f"💡 **Career Tip:** {chatbot_topics[selected_chatbot_topic][0]}"
-            st.sidebar.success(chatbot_response)
+    # **Generate Post Button**
+    if st.button("⚡ Generate Post"):
+        post = generate_post(selected_length, selected_language, selected_topic, selected_profession, custom_keywords)
+        st.write(post)
 
 if __name__ == "__main__":
     main()
