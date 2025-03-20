@@ -52,6 +52,7 @@ def extract_metadata(post):
     2. JSON object should have exactly three keys: line_count, language, and tags. 
     3. tags is an array of text tags. Extract a maximum of two tags.
     4. Language should be English or Tanglish (Tanglish means Tamil + English).
+    5. Relevant profession (if applicable) from: Student, IAS Officer, Lawyer, Cloud Engineer, AI Engineer, Fresher, Data Scientist, Entrepreneur, Doctor, Marketer, etc.
     
     Here is the actual post:
     {post}
@@ -70,6 +71,23 @@ def extract_metadata(post):
 
     return res
 
+def enhance_post_with_profession(text, profession):
+    """Enhances post content with domain-specific insights."""
+
+    profession_keywords = {
+        "Student": ["career growth", "learning mindset", "internships"],
+        "AI Engineer": ["machine learning", "deep learning", "LLMs"],
+        "Cloud Engineer": ["AWS", "scalability", "Kubernetes"],
+        "Entrepreneur": ["startup success", "funding", "growth hacking"],
+        "Doctor": ["medical AI", "patient care", "health tech"],
+        "Lawyer": ["legal insights", "case studies", "justice system"],
+        "Fresher": ["resume tips", "job search", "first job advice"]
+    }
+
+    if profession in profession_keywords:
+        text += f"\n\n💡 Key Insights for {profession}: " + ", ".join(profession_keywords[profession])
+
+    return text
 
 def get_unified_tags(posts_with_metadata):
     """Unifies tags across all posts using an LLM."""
@@ -83,24 +101,28 @@ def get_unified_tags(posts_with_metadata):
     unique_tags_list = ",".join(unique_tags)
 
     template = '''  
-    I will give you a list of tags. You need to unify them with the following rules:  
-    1. Merge similar tags into a single category.  
-       Example:  
-          - "Fresh Graduates", "Recent Graduates" → "Freshers"  
-          - "Job Hunting", "Job Search", "Applying for Jobs" → "Job Search"  
-          - "Motivation", "Inspiration", "Career Motivation" → "Motivation"  
-          - "Mental Health", "Job Search Anxiety", "Stress Management" → "Mental Health"  
-          - "Networking", "Building Connections", "Professional Networking" → "Networking"  
-          - "Self Improvement", "Personal Growth", "Career Growth" → "Self Improvement"  
-          - "Rejections", "Job Rejections", "Application Rejections" → "Rejections"  
-    2. Each tag should follow title case convention. Example: "Motivation", "Job Search"  
-    3. Output should be a JSON object (no preamble) mapping original tags to unified tags.  
-       Example:  
-       {{"Fresh Graduates": "Freshers", "Job Hunting": "Job Search", "Motivation": "Motivation"}}  
+    You are given a list of tags. Your task is to unify them into broader categories using the following rules:  
 
-    Here is the list of tags:  
-    {tags}  
-'''  
+    🔹 **Rules for Tag Unification:**  
+    1️⃣ Merge similar tags into a single standardized category.  
+       - Example:  
+          - "Fresh Graduates", "Recent Graduates" → **"Freshers"**  
+          - "Job Hunting", "Job Search", "Applying for Jobs" → **"Job Search"**  
+          - "Motivation", "Inspiration", "Career Motivation" → **"Motivation"**  
+          - "Mental Health", "Job Search Anxiety", "Stress Management" → **"Mental Health"**  
+          - "Networking", "Building Connections", "Professional Networking" → **"Networking"**  
+          - "Self Improvement", "Personal Growth", "Career Growth" → **"Self Improvement"**  
+          - "Rejections", "Job Rejections", "Application Rejections" → **"Rejections"**  
+    2️⃣ Each tag should follow **Title Case formatting** (e.g., "Job Search" instead of "job search").  
+    3️⃣ Return a **valid JSON object** mapping original tags to unified tags.  
+       Example Output Format:  
+       ```json
+       {{"Fresh Graduates": "Freshers", "Job Hunting": "Job Search", "Motivation": "Motivation"}}
+       ```
+
+    **List of Tags:**  
+    {tags}
+    '''  
 
     pt = PromptTemplate.from_template(template)
     chain = pt | llm
