@@ -87,24 +87,36 @@ def generate_fallback_post(topic, profession, post_reason, post_length, language
     Generates a fallback post when LLM fails.
     
     - Uses a structured manual format to ensure user still gets a useful post.
+    - Tanglish posts are generated manually to ensure natural language flow.
     """
+
     length_str = get_length_str(post_length)
 
-    fallback_template = f"""
-    🚀 Exciting Update! 🚀
+    if language == "English":
+        fallback_template = f"""
+        🚀 Exciting Update! 🚀
 
-    As a **{profession}**, I’ve been exploring **{topic}** lately, and it's been an incredible journey!
-    
-    Whether it's **{post_reason}**, or simply a passion for continuous learning, this has been a rewarding experience.
-    
-    The field of {topic} is evolving rapidly, and I’m eager to keep up with new trends.
-    
-    What’s your take on {topic}? Let’s discuss! 💡 #CareerGrowth #Networking
-    """
+        As a **{profession}**, I’ve been exploring **{topic}** lately, and it's been an incredible journey!
+        
+        Whether it's **{post_reason}**, or simply a passion for continuous learning, this has been a rewarding experience.
+        
+        The field of {topic} is evolving rapidly, and I’m eager to keep up with new trends.
+        
+        What’s your take on {topic}? Let’s discuss! 💡 #CareerGrowth #Networking
+        """
 
-    # ✅ Apply Tanglish Spelling Correction (if needed)
-    if language == "Tanglish":
-        fallback_template = correct_tanglish_spelling(fallback_template)
+    else:  # Tanglish version
+        fallback_template = f"""
+        🚀 Vera Level Update! 🚀
+
+        **{profession}** ah irunthu **{topic}** pathi kathukitu iruken, semma interesting journey da!  
+        
+        **{post_reason}** nu solli kathukitu poitu iruken, romba nalla experience!  
+        
+        **{topic}** ippo vera level ah maari iruku, update aganum nu try panren!  
+        
+        **Ungaloda opinion enna? Let's discuss!** 💡 #GrowthMindset #Networking
+        """
 
     return fallback_template
 
