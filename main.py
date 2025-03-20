@@ -195,15 +195,15 @@ def main():
     st.subheader("🚀 LinkedIn Post Generator")
     fs = FewShotPosts()
 
-    # Maintain state for selections
+    # Ensure session state has valid keys
     if "selected_category" not in st.session_state:
-        st.session_state["selected_category"] = list(professions.keys())[0]
+        st.session_state["selected_category"] = next(iter(professions.keys()))  # First valid category
 
     if "selected_subcategory" not in st.session_state:
-        st.session_state["selected_subcategory"] = list(professions[st.session_state["selected_category"]].keys())[0]
+        st.session_state["selected_subcategory"] = next(iter(professions[st.session_state["selected_category"]].keys()))  # First valid subcategory
 
     if "selected_profession" not in st.session_state:
-        st.session_state["selected_profession"] = list(professions[st.session_state["selected_category"]][st.session_state["selected_subcategory"]].keys())[0]
+        st.session_state["selected_profession"] = next(iter(professions[st.session_state["selected_category"]][st.session_state["selected_subcategory"]].keys()))  # First valid profession
 
     # 🔹 **Horizontal Layout for User-Friendly Experience**
     col1, col2, col3 = st.columns(3)
@@ -211,7 +211,7 @@ def main():
     with col1:
         selected_category = st.selectbox(
             "📂 Select Category:", 
-            options=professions.keys(),
+            options=list(professions.keys()),  # Convert dict keys to list for indexing
             index=list(professions.keys()).index(st.session_state["selected_category"])
         )
         st.session_state["selected_category"] = selected_category  # Update session state
@@ -226,7 +226,12 @@ def main():
         st.session_state["selected_subcategory"] = selected_subcategory  # Update session state
 
     with col3:
-        professions_list = list(professions[selected_category][selected_subcategory].keys())  # Get valid professions
+        # Ensure selected subcategory is valid before fetching professions
+        if selected_subcategory in professions[selected_category]:
+            professions_list = list(professions[selected_category][selected_subcategory].keys())  # Get valid professions
+        else:
+            professions_list = []  # Default empty list if invalid
+
         selected_profession = st.selectbox(
             "💼 Select Your Profession:", 
             options=professions_list,
@@ -238,7 +243,7 @@ def main():
     col4, col5 = st.columns(2)
 
     with col4:
-        topics = professions[selected_category][selected_subcategory][selected_profession]
+        topics = professions[selected_category][selected_subcategory].get(selected_profession, ["General Thoughts"])
         selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
 
     with col5:
