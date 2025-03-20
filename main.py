@@ -17,20 +17,6 @@ if user_api_key:
 else:
     st.sidebar.warning("⚠️ Please enter your API key to generate posts.")
 
-# Load predefined unified tags for better topic selection
-unified_tags = {
-    "Freshers": ["Fresh Graduates", "Recent Graduates"],
-    "Job Search": ["Job Hunting", "Applying for Jobs", "Career Transition"],
-    "Motivation": ["Inspiration", "Self Improvement", "Growth Mindset"],
-    "Mental Health": ["Job Search Anxiety", "Stress Management", "Work-Life Balance"],
-    "Networking": ["Building Connections", "Professional Networking", "Socializing"],
-    "Rejections": ["Job Rejections", "Application Rejections", "Interview Failures"],
-    "Cloud Computing": ["AWS", "Azure", "GCP"],
-    "AI & ML": ["Machine Learning", "Deep Learning", "Generative AI"]
-}
-
-st.sidebar.subheader("📌 Select Unified Topic")
-selected_unified_topic = st.sidebar.selectbox("Choose a relevant topic:", options=list(unified_tags.keys()))
 
 # 🏆 Profession categories & topics
 professions = {
@@ -184,9 +170,22 @@ professions = {
             "Freelance Photographer": ["Photo Editing", "Composition","General Thoughts"],
             "Freelance Filmmaker": ["Short Films", "Content Monetization","General Thoughts"]
         }
+    },
+    
+    "Personal Growth & Soft Skills": {
+        "Motivation": ["Inspiration", "Self Improvement", "Growth Mindset"],
+        "Mental Health": ["Job Search Anxiety", "Stress Management", "Work-Life Balance"],
+        "Networking": ["Building Connections", "Professional Networking", "Socializing"],
+        "Rejections": ["Job Rejections", "Application Rejections", "Interview Failures"],
+        "Leadership": ["Decision Making", "Team Management", "Public Speaking"],
+        "Productivity": ["Time Management", "Focus Strategies", "Deep Work"],
+        "Personal Branding": ["LinkedIn Growth", "Content Creation", "Online Influence"],
+        "Critical Thinking": ["Problem Solving", "Logical Reasoning", "Debate"],
+        "Confidence Building": ["Overcoming Fear", "Self-Expression", "Public Speaking"],
+        "Emotional Intelligence": ["Handling Criticism", "Resilience", "Self-Awareness"],
+        "Mindset Mastery": ["Stoicism", "Growth Mindset", "Mental Toughness"]
     }
 }
-
 
 length_options = ["Short", "Medium", "Long"]
 language_options = ["English", "Tanglish"]
@@ -228,7 +227,7 @@ def main():
     with col3:
         professions_list = list(professions[selected_category][selected_subcategory].keys())
         selected_profession = st.selectbox(
-            "💼 Select Your Profession:", 
+            "💼 Select Your Profession / Topic:", 
             options=professions_list,
             index=professions_list.index(st.session_state["selected_profession"]) if st.session_state["selected_profession"] in professions_list else 0
         )
