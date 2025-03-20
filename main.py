@@ -52,7 +52,7 @@ professions = {
         "Cloud": {
             "Cloud Engineer": ["AWS", "Azure", "GCP", "Kubernetes"],
             "Cloud Security Engineer": ["DevSecOps", "CloudSecurity", "Virtualization"],
-            "Cloud Solutions Architect": ["Infrastructure", "Serverless", "Networking"]
+            "Cloud Solutions Architect": ["Infrastructure", "Serverless", "Networking"],
             "DevOps Engineer": ["Automation", "CI/CD", "Infrastructure"],
         },
         "Cybersecurity": {
