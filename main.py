@@ -34,141 +34,158 @@ chatbot_topics = {
 # 🏆 Profession categories & topics
 professions = {
     "Technical": {
-        "IT": {
+        "IT & Software Development": {
             "Software Developer": ["Coding", "Debugging", "Software Architecture"],
             "Full Stack Developer": ["Frontend", "Backend", "APIs"],
-            "Cybersecurity Specialist": ["Security", "Hacking", "Encryption"],
-            "Blockchain Developer": ["Blockchain", "Smart Contracts", "DeFi"],
-            "UI/UX Designer": ["User Experience", "Design", "Prototyping"],
-            "Open-Source Contributor": ["GitHub", "Collaboration", "Projects"]
-        },
-        "AI": {
-            "AI Engineer": ["MachineLearning", "DeepLearning", "GenerativeAI","AI Agents","Agentic AI","LLM"],
-            "NLP Engineer": ["NLP", "Text Analysis", "Chatbots"],
-            "Computer Vision Engineer": ["Image Processing", "Object Detection", "Face Recognition"],
-            "AI Research Scientist": ["AIResearch", "Ethics", "Innovation"],
-            "Robotics Engineer": ["Automation", "AI Ethics", "Computer Vision"]
-        },
-        "Cloud": {
+            "Mobile App Developer": ["iOS", "Android", "Flutter"],
+            "Game Developer": ["Unity", "Unreal Engine", "Game AI"],
+            "Embedded Systems Engineer": ["IoT", "Firmware", "Microcontrollers"],
+            "Blockchain Developer": ["Smart Contracts", "DeFi", "Cryptography"],
+            "Cybersecurity Specialist": ["PenTesting", "Encryption", "Zero Trust"],
             "Cloud Engineer": ["AWS", "Azure", "GCP", "Kubernetes"],
-            "Cloud Security Engineer": ["DevSecOps", "CloudSecurity", "Virtualization"],
-            "Cloud Solutions Architect": ["Infrastructure", "Serverless", "Networking"],
-            "DevOps Engineer": ["Automation", "CI/CD", "Infrastructure"],
+            "DevOps Engineer": ["CI/CD", "Infrastructure as Code", "Automation"],
+            "UI/UX Designer": ["User Experience", "Design Thinking", "Prototyping"],
+            "Open-Source Contributor": ["GitHub", "Collaboration", "Community"]
+        },
+        "Artificial Intelligence & Machine Learning": {
+            "AI Engineer": ["Generative AI", "LLMs", "Deep Learning"],
+            "Prompt Engineer": ["AI Prompting", "Fine-Tuning", "LLM Customization"],
+            "NLP Engineer": ["Text Analysis", "Chatbots", "Conversational AI"],
+            "Computer Vision Engineer": ["Image Processing", "Object Detection"],
+            "AI Research Scientist": ["Model Training", "Ethics", "ML Innovations"],
+            "Robotics Engineer": ["Automation", "AI Ethics", "Perception Systems"],
+            "AI Ethics Consultant": ["Fairness", "Bias Detection", "AI Policy"]
+        },
+        "Cloud & DevOps": {
+            "Cloud Solutions Architect": ["AWS", "Azure", "Hybrid Cloud"],
+            "Cloud Security Engineer": ["DevSecOps", "Compliance", "Zero Trust"],
+            "Site Reliability Engineer (SRE)": ["Observability", "Fault Tolerance"],
+            "Kubernetes Engineer": ["Microservices", "Scaling", "Containerization"]
         },
         "Cybersecurity": {
-            "Cybersecurity Analyst": ["Threats", "Pentesting", "Encryption"],
-            "Ethical Hacker": ["Hacking", "Phishing", "ZeroTrust"],
-            "Security Engineer": ["Compliance", "Ransomware", "Cybersecurity"]
+            "Ethical Hacker": ["Hacking", "Phishing", "Red Teaming"],
+            "Security Engineer": ["SIEM", "Threat Intelligence", "Network Security"],
+            "Incident Response Analyst": ["Threat Mitigation", "Security Audits"],
+            "Cryptography Expert": ["Encryption", "Blockchain Security"]
         },
-        "Data Science": {
-            "Data Scientist": ["Analytics", "BigData", "AIModels"],
-            "Data Analyst": ["Visualization", "Forecasting", "Statistics"],
-            "Business Intelligence Analyst": ["BI", "Dashboards", "Data Mining"]
+        "Data Science & Analytics": {
+            "Data Scientist": ["AI Models", "Big Data", "Predictive Analytics"],
+            "Data Engineer": ["ETL Pipelines", "Data Warehousing", "Cloud Storage"],
+            "Business Intelligence Analyst": ["BI Tools", "Data Visualization"],
+            "ML Engineer": ["MLOps", "Model Deployment", "Feature Engineering"],
+            "Bioinformatics Scientist": ["Genomics", "Computational Biology"]
         }
     },
-    "Healthcare": {
-        "Doctors": {
-            "Surgeon": ["Surgery", "Medical Innovations", "Patient Care"],
-            "Cardiologist": ["Heart Health", "Treatments", "Research"],
-            "Pediatrician": ["Children’s Health", "Vaccination", "Diagnosis"]
+    "Healthcare & Medicine": {
+        "Doctors & Physicians": {
+            "General Practitioner": ["Diagnosis", "Patient Care", "Primary Health"],
+            "Surgeon": ["Surgical Innovations", "Medical Robotics"],
+            "Cardiologist": ["Heart Health", "Clinical Trials"],
+            "Neurologist": ["Brain Research", "Mental Health"],
+            "Oncologist": ["Cancer Research", "Precision Medicine"]
         },
-        "Medical Support": {
-            "Registered Nurse": ["Therapy", "Nursing", "MentalHealth"],
-            "Pharmacist": ["Pharmacy", "Medication", "Prevention"],
-            "Physical Therapist": ["Rehabilitation", "PublicHealth", "Wellness"]
+        "Healthcare Technology": {
+            "Medical AI Researcher": ["AI in Healthcare", "Medical Imaging AI"],
+            "Telemedicine Specialist": ["Remote Consultations", "eHealth"],
+            "Biomedical Engineer": ["Medical Devices", "Prosthetics"],
+            "Pharmacovigilance Expert": ["Drug Safety", "Clinical Trials"]
+        },
+        "Mental Health & Wellness": {
+            "Psychologist": ["Therapy", "Mental Health Awareness"],
+            "Psychiatrist": ["Neuropharmacology", "Cognitive Science"]
         }
     },
-    "Engineering": {
-        "Core Engineering": {
-            "Mechanical Engineer": ["Manufacturing", "CAD", "Design"],
-            "Electrical Engineer": ["Prototyping", "Sustainability", "Innovation"],
-            "Civil Engineer": ["Construction", "Testing", "Infrastructure"]
+    "Engineering & Technology": {
+        "Mechanical Engineering": {
+            "Automotive Engineer": ["EV Technology", "Autonomous Vehicles"],
+            "Aerospace Engineer": ["Rocket Propulsion", "Space Tech"],
+            "Manufacturing Engineer": ["Lean Manufacturing", "3D Printing"]
+        },
+        "Electrical & Electronics": {
+            "Renewable Energy Engineer": ["Solar Tech", "Battery Storage"],
+            "Chip Design Engineer": ["Semiconductors", "FPGA"],
+            "Power Systems Engineer": ["Smart Grids", "Energy Efficiency"]
+        },
+        "Civil & Structural Engineering": {
+            "Structural Engineer": ["Earthquake Resistant Design", "Bridges"],
+            "Smart Cities Engineer": ["Urban Planning", "GreenTech"]
         }
     },
-    "Business": {
-        "Entrepreneurship": {
-            "Startup Founder": ["Startups", "Fundraising", "Scaling"],
-            "Small Business Owner": ["Networking", "Leadership", "Branding"]
+    "Business & Finance": {
+        "Entrepreneurship & Startups": {
+            "Tech Startup Founder": ["Product Market Fit", "Angel Investment"],
+            "SaaS Founder": ["Subscription Models", "Scaling"],
+            "FinTech Innovator": ["Digital Banking", "DeFi"],
+            "EdTech Entrepreneur": ["AI Tutors", "Online Learning"],
+            "GreenTech Founder": ["Sustainability", "Carbon Neutrality"]
         },
-        "Marketing": {
-            "Digital Marketing Specialist": ["SEO", "Branding", "Advertising"],
-            "Social Media Marketer": ["SocialMedia", "Campaigns", "Growth"]
+        "Marketing & Sales": {
+            "Growth Hacker": ["Viral Marketing", "User Retention"],
+            "SEO Specialist": ["Google Ranking", "Keyword Optimization"],
+            "Social Media Manager": ["Brand Engagement", "Content Strategy"],
+            "Sales Executive": ["Negotiation", "Lead Generation"]
         },
-        "Finance": {
-            "Financial Analyst": ["Investing", "Banking", "Wealth"],
-            "Risk Manager": ["Taxation", "Trading", "Portfolio"]
-        },
-        "Sales": {
-            "Sales Manager": ["Negotiation", "Closing", "LeadGeneration"],
-            "Account Manager": ["B2B", "B2C", "CRM"]
+        "Finance & Investment": {
+            "Financial Analyst": ["Stock Market", "Wealth Management"],
+            "Risk Manager": ["Portfolio Management", "Financial Compliance"],
+            "Cryptocurrency Analyst": ["Bitcoin Trends", "NFT Market"]
         }
     },
-    "Legal": {
-        "Lawyers": {
-            "Corporate Lawyer": ["Contracts", "Litigation", "Compliance"],
-            "Intellectual Property Lawyer": ["IP", "Regulations", "Ethics"]
+    "Legal & Government": {
+        "Law & Compliance": {
+            "Corporate Lawyer": ["Mergers & Acquisitions", "IP Law"],
+            "Human Rights Lawyer": ["Ethical Justice", "Advocacy"],
+            "Legal Tech Consultant": ["AI in Law", "Blockchain Contracts"]
         },
-        "Legal Support": {
-            "Paralegal": ["Research", "CaseLaw", "Policy"],
-            "Compliance Officer": ["Advocacy", "Justice", "Arbitration"]
+        "Government & Public Policy": {
+            "IAS Officer": ["Policy Implementation", "Governance"],
+            "Diplomat": ["Foreign Relations", "International Trade"],
+            "Urban Planner": ["Smart Cities", "Public Transportation"]
         }
     },
-    "Education": {
-        "Academia": {
-            "Professor": ["Research", "Lectures", "Pedagogy"],
-            "Education Consultant": ["Innovation", "HigherEd", "Publications"]
-        },
-        "School": {
-            "School Teacher": ["Teaching", "Curriculum", "Exams"],
-            "EdTech Specialist": ["EdTech", "Learning", "SpecialEducation"]
-        }
+    "Media, Design & Arts": {
+    "Media & Journalism": {
+        "Investigative Journalist": ["Political Reporting", "Fact Checking", "Breaking News"],
+        "Podcaster": ["Audio Content", "Storytelling", "Engagement Strategies"],
+        "Public Relations Expert": ["Brand Management", "Crisis Handling", "Media Outreach"]
     },
-    "Consulting": {
-        "Business Consulting": {
-            "Management Consultant": ["Strategy", "Optimization", "Growth"],
-            "Digital Transformation Consultant": ["Leadership", "Analytics", "Transformation"]
-        }
+    "Content Creation & Digital Media": {
+        "YouTuber": ["Video Content", "Subscriber Growth", "Monetization"],
+        "Social Media Influencer": ["Instagram Growth", "Reels/TikTok Strategies", "Brand Collabs"],
+        "Content Creator": ["Content Strategy", "Engagement Metrics", "Niche Selection"],
+        "Live Streamer (Twitch, YouTube, Kick)": ["Gaming", "Live Interaction", "Sponsorships"]
     },
-    "Government & Public Services": {
-        "Civil Services": {
-            "IAS Officer": ["Governance", "Policy", "PublicService"],
-            "Diplomat": ["Administration", "Leadership", "Diplomacy"]
-        },
-        "Law Enforcement": {
-            "Police Officer": ["Crime", "Surveillance", "Forensics"],
-            "Intelligence Analyst": ["Ethics", "NationalSecurity", "ThreatAssessment"]
-        }
+    "Video Editing & Production": {
+        "Video Editor": ["Adobe Premiere Pro", "Final Cut Pro", "Post-Production"],
+        "Motion Graphics Artist": ["After Effects", "3D Animation", "Visual Effects"],
+        "Cinematographer": ["Camera Techniques", "Lighting", "Color Grading"],
+        "Film Director": ["Scriptwriting", "Storyboarding", "Directing Actors"]
     },
-    "Media & Creative": {
-        "Media": {
-            "Journalist": ["Journalism", "Reporting", "Storytelling"],
-            "Public Relations Specialist": ["PR", "Content", "Editing"]
-        },
-        "Creative Arts": {
-            "Graphic Designer": ["Design", "Illustration", "Aesthetics"],
-            "Filmmaker": ["Photography", "Animation", "Music"]
-        }
+    "Graphic Design & Animation": {
+        "Graphic Designer": ["Typography", "Illustration", "Branding"],
+        "3D Animator": ["Blender", "Maya", "CGI & VFX"],
+        "UI/UX Designer": ["Wireframes", "Prototyping", "User Interaction"]
     },
-    "Freelancing": {
-        "Tech Freelancers": {
-            "Freelance Software Developer": ["RemoteWork", "Contracts", "Clients"],
-            "Freelance UI/UX Designer": ["Branding", "Portfolios", "DesignTrends"]
+    "Gaming Industry & Esports": {
+        "Game Designer": ["Level Design", "Narrative Development", "Game Mechanics"],
+        "Esports Manager": ["Competitive Gaming", "Sponsorships", "Team Management"],
+        "Gaming Content Creator": ["Let’s Plays", "Game Streaming", "Twitch Growth"]
+    }
+},
+    "Freelancing & Remote Work": {
+        "Freelance Tech": {
+            "Freelance Developer": ["Remote Work", "Client Management"],
+            "Freelance UX Designer": ["Wireframes", "Prototyping"],
+            "Freelance Cybersecurity Consultant": ["Pen Testing", "Data Privacy"]
         },
-        "Marketing Freelancers": {
-            "Freelance Digital Marketer": ["Engagement", "GrowthHacking", "Conversion"]
-        }
-    },
-    "Students & Freshers": {
-        "Student": {
-            "Undergraduate Student": ["Learning", "Internships", "Projects"],
-            "Graduate Student": ["Research", "Networking", "Exams"]
-        },
-        "Fresher": {
-            "Entry-Level Software Developer": ["Jobs", "Resume", "Interview"],
-            "Junior Data Scientist": ["Training", "Certifications", "EntryLevel"]
+        "Freelance Creative": {
+            "Freelance Writer": ["SEO Blogs", "Ghostwriting"],
+            "Freelance Photographer": ["Photo Editing", "Composition"],
+            "Freelance Filmmaker": ["Short Films", "Content Monetization"]
         }
     }
 }
+
 
 length_options = ["Short", "Medium", "Long"]
 language_options = ["English", "Tanglish"]
