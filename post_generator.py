@@ -16,20 +16,20 @@ def get_length_str(length):
 
 def generate_post(post_length, language, topic, profession, post_reason, custom_keywords=""):
     """
-    Generates a highly personalized LinkedIn post based on user inputs.
+    Generates a **highly personalized LinkedIn post** based on user inputs.
 
     - **post_length**: Short, Medium, or Long
     - **language**: English or Tanglish
     - **topic**: The subject of the post
     - **profession**: User's selected profession
-    - **post_reason**: The purpose of the post (e.g., "Got a Promotion", "Completed a Course")
+    - **post_reason**: The purpose of the post (e.g., "My Experience with Job Interviews", "Landed a New Job")
     - **custom_keywords**: Additional keywords to fine-tune the post
 
     Returns:
-        A **unique, personalized LinkedIn post** as a string.
+        A **unique, contextually relevant LinkedIn post**.
     """
 
-    # ✅ Prevent Empty Inputs
+    # ✅ **Prevent Empty Inputs**
     if not topic:
         return "⚠️ Error: Topic is missing!"
     if not profession:
@@ -39,32 +39,36 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
 
     length_str = get_length_str(post_length)
 
-    # ✅ **Craft a dynamic prompt based on user selection**
+    # ✅ **Dynamically Generate Prompt Based on Purpose**
     prompt = f"""
-    ✨ **Create a LinkedIn post that is unique, engaging, and deeply personal.**
+    🎯 **Create a LinkedIn post that feels engaging, natural, and contextually relevant.**
     
-    🏆 **User Milestone**: {post_reason}
+    🏆 **Post Purpose**: {post_reason}
     💼 **Profession**: {profession}
     🔹 **Topic**: {topic}
     📏 **Length**: {length_str}
     🔑 **Extra Details**: {custom_keywords if custom_keywords else "None"}
 
-    🎯 **What the post should convey**:
-    - The user should sound **authentic, confident, and proud**.
-    - It should feel **natural, engaging, and emotionally relatable**.
-    - No overused phrases—make it **fresh, human-like, and inspiring**.
-    - If **Tanglish**, use a smooth mix of Tamil+English in English script.
+    🎯 **What the post should achieve**:
+    - The content should **match the user’s intention fully** (no generic responses).
+    - Avoid clichés—make it **unique, real, and valuable**.
+    - If **Tanglish**, mix Tamil and English naturally (English script).
+
+    💡 **Make sure the post fits the tone of the purpose.**
+    - If the purpose is **'Job Interview Experience'**, share learnings, challenges, and key takeaways.
+    - If the purpose is **'Landed a New Job'**, share the excitement, gratitude, and future vision.
+    - If the purpose is **'Completed a Course'**, share the learning experience and future applications.
     """
 
-    # ✅ **Generate post using LLM**
     try:
+        # ✅ **Generate post using LLM**
         response = llm.generate(prompt)
 
-        # ✅ Handle empty or invalid response
+        # ✅ **Handle empty or invalid response**
         if not response or not isinstance(response, str):
             return generate_fallback_post(topic, profession, post_reason, post_length, language)
 
-        # ✅ Apply Tanglish Spelling Correction (if needed)
+        # ✅ **Apply Tanglish Spelling Correction (if needed)**
         if language == "Tanglish":
             response = correct_tanglish_spelling(response)
 
@@ -78,107 +82,90 @@ def generate_fallback_post(topic, profession, post_reason, post_length, language
     """
     Generates a **fallback post** when LLM fails.
     
-    - Uses a **context-aware format** to ensure a **useful and meaningful** post.
-    - Tanglish posts **sound natural** and not robotic.
+    - Uses a **structured but flexible approach** to ensure a **valuable** post.
+    - Tanglish posts are **written naturally** instead of direct translations.
     """
 
     length_str = get_length_str(post_length)
 
-    # ✅ **Dynamic fallback content generation (No fixed templates)**
-    if post_reason == "Got a Promotion":
+    # ✅ **Intelligent fallback generation based on purpose**
+    if post_reason == "My Experience with Job Interviews":
         english_fallbacks = [
             f"""
-            🚀 Exciting news! I’m incredibly grateful to have been **promoted as a {profession}** in the field of {topic}!
+            🎤 Job interviews are more than just a test of skills—they are a test of mindset.
 
-            This journey has been filled with challenges, learning, and growth. Looking forward to taking on **new responsibilities and contributing even more**.
+            As a **{profession}**, I’ve had my share of **challenging interviews** in {topic}. Some went well, some didn’t, but each one **taught me something valuable**.
 
-            Huge thanks to my mentors, colleagues, and everyone who supported me! On to the next chapter! 🚀 #CareerGrowth #Promotion
+            Key takeaway? **Confidence and preparation matter as much as technical skills.**
+            If you're preparing for interviews, my biggest advice: **Be yourself and keep learning!** 🚀 #JobInterviews
             """,
 
             f"""
-            🌟 A new milestone unlocked! 
+            🎯 Interviews can be unpredictable, but every experience makes you stronger.
 
-            Thrilled to share that I’ve been **promoted as a {profession}**, marking a significant step in my journey in {topic}.
+            In my journey as a **{profession}**, I’ve faced **tough technical rounds, unexpected questions, and even rejections**. But each one shaped me.
 
-            Hard work, persistence, and passion always pay off! Excited to keep learning and contributing. 🚀 #Success #NewRole
+            The best lesson? **A rejection today might lead to a better opportunity tomorrow.**  
+            Keep learning, keep growing! 💡 #CareerLessons
             """
         ]
 
         tanglish_fallbacks = [
             f"""
-            🔥 Vera level update! **Naan inime {profession} role ku promote aayiten!** 🚀
+            🎤 Interview vera level experience dhaan! 😅  
 
-            **{topic}** la romba kashtapattu work panniten, ipo oru periya milestone reach panniten.  
-            **Hard work, patience, and learning** – ithanoda key!  
-
-            Neenga ellarum en support pannitinga, nandri! ❤️ #CareerGrowth
+            **{topic}** la konjam confident ah irunthalum, interview la kelvi kekum pothu vera level tension varum! 🤯  
+            
+            **Experience enna soludhu na?** Confidence iruntha pothum! **Preparation + Nambikkai = Success!** 💡  
+            Naangalum kashtapattu kathukitom, neengalum nalla perform pannunga! 🔥 #JobInterview
             """,
 
             f"""
-            🎉 Semma happy moment!  
+            🔥 **Interview vera level learning experience dhaan!**  
 
-            **En promotion** vandhachu! 😍 **{profession}** role ku elevate aayiten in {topic}.  
+            **Naan {topic} pathi kathukittu nalla prepare pannirunthalum**, interview la unexpected questions kekum pothu thirupi yosikanum.  
 
-            Challenges irundhalum, **kadaisi varaikum nambikkai irundhuchu** – ipo ithu result!  
-            Let’s all grow together! 🚀 #Success #Promotion
+            **Lesson?** Rejection nu oru periya vishayam illa, **oru door close aana, innoru better chance ready irukum!** 🚀  
+            Neenga ethana interviews attend pannirukeenga? Share pannunga! 💡 #CareerGrowth
             """
         ]
 
-    elif post_reason == "Completed a Course":
+    elif post_reason == "Landed a New Job":
         english_fallbacks = [
             f"""
-            🎓 Just completed a deep-dive into **{topic}**! 
+            🎉 Exciting update! I’m thrilled to announce that I’ve joined **{profession}** role in {topic}!  
 
-            As a **{profession}**, continuous learning is essential, and this course gave me incredible insights.  
-            Looking forward to **applying these skills** in real-world projects. 🚀  
+            The journey wasn’t easy—lots of **learning, rejections, and self-doubt** along the way. But every challenge shaped me into who I am today.  
 
-            **Have you taken any interesting courses lately? Let’s discuss!** 👇 #Learning #Upskilling
-            """,
-
-            f"""
-            📚 Learning never stops!  
-
-            Thrilled to share that I’ve successfully **completed a course on {topic}**.  
-            Every new skill learned is a step forward. Excited to implement these insights in my role as a **{profession}**! 🚀  
-
-            **What’s the best course you’ve ever taken? Drop your recommendations!** 👇 #CareerGrowth
+            To everyone still searching, **stay patient, keep learning, and trust the process**. 🚀 #NewJob #CareerGrowth
             """
         ]
 
         tanglish_fallbacks = [
             f"""
-            📚 Vera level course complete panniten!  
+            🔥 Vera level news! **Naan ippo {profession} role ku join panniten in {topic}!** 😍  
 
-            **{topic}** pathi **deep ah study pannitu** ipo confidence ah iruken.  
-            **Learning never stops da!** Ithoda next step apply pannitu, innum periya level ku poganum! 🚀  
+            **Challenges irunthuchu**, but **hard work + patience** success kuduthuchu!  
+            Ithuvum oru new start dhaan! 🚀 **Naangalum improve aaganum, neengalum improve aaganum!**  
 
-            **Neenga ethavathu course complete panna experience share pannunga!** #Growth #Learning
-            """,
-
-            f"""
-            🎉 Course complete agiduchu!  
-
-            **{topic}** la periya learning eduthen.  
-            **{profession}** ah irukura oruthanuku knowledge growth romba mukkiyam.  
-            Naan next level la povathuku ready! 🔥  
-
-            **Neenga enna course recommend pannuringa? Comment pannunga!** #Upskilling
+            **Neenga enna challenges face panninga? Let’s discuss!** #NewJob
             """
         ]
 
     else:
         english_fallbacks = [
             f"""
-            🚀 Big milestone achieved! Just took a step forward in my career as a **{profession}** in {topic}.  
-            Every journey has its challenges, but growth comes from pushing through.  
+            🚀 Big step forward! Just achieved a major milestone in {topic} as a **{profession}**.  
 
-            Excited for what’s next! Let’s connect and share insights. 💡 #CareerGrowth #Networking
+            Every journey comes with struggles, but growth happens when we embrace challenges.  
+            Excited for what’s next! Let’s connect and grow together. 💡 #Networking
             """
         ]
 
         tanglish_fallbacks = [
             f"""
-            🔥 Periya milestone! **Naan {topic} la oru periya step eduthiruken** as a {profession}.  
+            🔥 Periya step forward! **Naan {topic} la oru milestone achieve panniten** as a **{profession}**.  
+
             **Life la ellame oru learning dhaan!** Innum nalla improve aaganum nu nenekiren! 🚀  
             **Neenga enna nenekreenga? Let's discuss!** 💡 #CareerGrowth
             """
