@@ -4,6 +4,20 @@ from few_shot import FewShotPosts
 from post_generator import generate_post
 from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
+
+# Sidebar for API Key input (hidden)
+st.sidebar.header("🔐 Enter LLM API Key")
+user_api_key = st.sidebar.text_input("API Key", type="password")
+
+# Store API key in session state (secure access)
+if user_api_key:
+    os.environ["GROQ_API_KEY"] = user_api_key
+    st.sidebar.success("✅ API Key Set Successfully!")
+else:
+    st.sidebar.warning("⚠️ Please enter your API key to generate posts.")
+
 # Profession categories, subcategories, and discussion topics
 professions = {
     "Technical": {
