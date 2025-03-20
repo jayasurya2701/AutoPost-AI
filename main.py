@@ -17,6 +17,21 @@ if user_api_key:
 else:
     st.sidebar.warning("⚠️ Please enter your API key to generate posts.")
 
+# Load predefined unified tags for better topic selection
+unified_tags = {
+    "Freshers": ["Fresh Graduates", "Recent Graduates"],
+    "Job Search": ["Job Hunting", "Applying for Jobs", "Career Transition"],
+    "Motivation": ["Inspiration", "Self Improvement", "Growth Mindset"],
+    "Mental Health": ["Job Search Anxiety", "Stress Management", "Work-Life Balance"],
+    "Networking": ["Building Connections", "Professional Networking", "Socializing"],
+    "Rejections": ["Job Rejections", "Application Rejections", "Interview Failures"],
+    "Cloud Computing": ["AWS", "Azure", "GCP"],
+    "AI & ML": ["Machine Learning", "Deep Learning", "Generative AI"]
+}
+
+st.sidebar.subheader("📌 Select Unified Topic")
+selected_unified_topic = st.sidebar.selectbox("Choose a relevant topic:", options=list(unified_tags.keys()))
+
 # 🏆 Profession categories & topics
 professions = {
     "Technical": {
