@@ -22,152 +22,152 @@ professions = {
     "Technical": {
         "IT & Software Development": {
             "Software Developer": ["Coding", "Debugging", "Software Architecture","General Thoughts"],
-            "Full Stack Developer": ["Frontend", "Backend", "APIs"],
-            "Mobile App Developer": ["iOS", "Android", "Flutter"],
-            "Game Developer": ["Unity", "Unreal Engine", "Game AI"],
-            "Embedded Systems Engineer": ["IoT", "Firmware", "Microcontrollers"],
-            "Blockchain Developer": ["Smart Contracts", "DeFi", "Cryptography"],
-            "Cybersecurity Specialist": ["PenTesting", "Encryption", "Zero Trust"],
-            "Cloud Engineer": ["AWS", "Azure", "GCP", "Kubernetes"],
-            "DevOps Engineer": ["CI/CD", "Infrastructure as Code", "Automation"],
-            "UI/UX Designer": ["User Experience", "Design Thinking", "Prototyping"],
-            "Open-Source Contributor": ["GitHub", "Collaboration", "Community"]
+            "Full Stack Developer": ["Frontend", "Backend", "APIs","General Thoughts"],
+            "Mobile App Developer": ["iOS", "Android", "Flutter","General Thoughts"],
+            "Game Developer": ["Unity", "Unreal Engine", "Game AI","General Thoughts"],
+            "Embedded Systems Engineer": ["IoT", "Firmware", "Microcontrollers","General Thoughts"],
+            "Blockchain Developer": ["Smart Contracts", "DeFi", "Cryptography","General Thoughts"],
+            "Cybersecurity Specialist": ["PenTesting", "Encryption", "Zero Trust","General Thoughts"],
+            "Cloud Engineer": ["AWS", "Azure", "GCP", "Kubernetes","General Thoughts"],
+            "DevOps Engineer": ["CI/CD", "Infrastructure as Code", "Automation","General Thoughts"],
+            "UI/UX Designer": ["User Experience", "Design Thinking", "Prototyping","General Thoughts"],
+            "Open-Source Contributor": ["GitHub", "Collaboration", "Community","General Thoughts"]
         },
         "Artificial Intelligence & Machine Learning": {
-            "AI Engineer": ["Generative AI", "LLMs", "Deep Learning"],
-            "Prompt Engineer": ["AI Prompting", "Fine-Tuning", "LLM Customization"],
-            "NLP Engineer": ["Text Analysis", "Chatbots", "Conversational AI"],
-            "Computer Vision Engineer": ["Image Processing", "Object Detection"],
-            "AI Research Scientist": ["Model Training", "Ethics", "ML Innovations"],
-            "Robotics Engineer": ["Automation", "AI Ethics", "Perception Systems"],
-            "AI Ethics Consultant": ["Fairness", "Bias Detection", "AI Policy"]
+            "AI Engineer": ["Generative AI", "LLMs", "Deep Learning","General Thoughts"],
+            "Prompt Engineer": ["AI Prompting", "Fine-Tuning", "LLM Customization","General Thoughts"],
+            "NLP Engineer": ["Text Analysis", "Chatbots", "Conversational AI","General Thoughts"],
+            "Computer Vision Engineer": ["Image Processing", "Object Detection","General Thoughts"],
+            "AI Research Scientist": ["Model Training", "Ethics", "ML Innovations","General Thoughts"],
+            "Robotics Engineer": ["Automation", "AI Ethics", "Perception Systems","General Thoughts"],
+            "AI Ethics Consultant": ["Fairness", "Bias Detection", "AI Policy","General Thoughts"]
         },
         "Cloud & DevOps": {
-            "Cloud Solutions Architect": ["AWS", "Azure", "Hybrid Cloud"],
-            "Cloud Security Engineer": ["DevSecOps", "Compliance", "Zero Trust"],
-            "Site Reliability Engineer (SRE)": ["Observability", "Fault Tolerance"],
-            "Kubernetes Engineer": ["Microservices", "Scaling", "Containerization"]
+            "Cloud Solutions Architect": ["AWS", "Azure", "Hybrid Cloud","General Thoughts"],
+            "Cloud Security Engineer": ["DevSecOps", "Compliance", "Zero Trust","General Thoughts"],
+            "Site Reliability Engineer (SRE)": ["Observability", "Fault Tolerance","General Thoughts"],
+            "Kubernetes Engineer": ["Microservices", "Scaling", "Containerization","General Thoughts"]
         },
         "Cybersecurity": {
-            "Ethical Hacker": ["Hacking", "Phishing", "Red Teaming"],
-            "Security Engineer": ["SIEM", "Threat Intelligence", "Network Security"],
-            "Incident Response Analyst": ["Threat Mitigation", "Security Audits"],
-            "Cryptography Expert": ["Encryption", "Blockchain Security"]
+            "Ethical Hacker": ["Hacking", "Phishing", "Red Teaming","General Thoughts"],
+            "Security Engineer": ["SIEM", "Threat Intelligence", "Network Security","General Thoughts"],
+            "Incident Response Analyst": ["Threat Mitigation", "Security Audits","General Thoughts"],
+            "Cryptography Expert": ["Encryption", "Blockchain Security","General Thoughts"]
         },
         "Data Science & Analytics": {
-            "Data Scientist": ["AI Models", "Big Data", "Predictive Analytics"],
-            "Data Engineer": ["ETL Pipelines", "Data Warehousing", "Cloud Storage"],
-            "Business Intelligence Analyst": ["BI Tools", "Data Visualization"],
-            "ML Engineer": ["MLOps", "Model Deployment", "Feature Engineering"],
-            "Bioinformatics Scientist": ["Genomics", "Computational Biology"]
+            "Data Scientist": ["AI Models", "Big Data", "Predictive Analytics","General Thoughts"],
+            "Data Engineer": ["ETL Pipelines", "Data Warehousing", "Cloud Storage","General Thoughts"],
+            "Business Intelligence Analyst": ["BI Tools", "Data Visualization","General Thoughts"],
+            "ML Engineer": ["MLOps", "Model Deployment", "Feature Engineering","General Thoughts"],
+            "Bioinformatics Scientist": ["Genomics", "Computational Biology","General Thoughts"]
         }
     },
     "Healthcare & Medicine": {
         "Doctors & Physicians": {
-            "General Practitioner": ["Diagnosis", "Patient Care", "Primary Health"],
-            "Surgeon": ["Surgical Innovations", "Medical Robotics"],
-            "Cardiologist": ["Heart Health", "Clinical Trials"],
-            "Neurologist": ["Brain Research", "Mental Health"],
-            "Oncologist": ["Cancer Research", "Precision Medicine"]
+            "General Practitioner": ["Diagnosis", "Patient Care", "Primary Health","General Thoughts"],
+            "Surgeon": ["Surgical Innovations", "Medical Robotics","General Thoughts"],
+            "Cardiologist": ["Heart Health", "Clinical Trials","General Thoughts"],
+            "Neurologist": ["Brain Research", "Mental Health","General Thoughts"],
+            "Oncologist": ["Cancer Research", "Precision Medicine","General Thoughts"]
         },
         "Healthcare Technology": {
-            "Medical AI Researcher": ["AI in Healthcare", "Medical Imaging AI"],
-            "Telemedicine Specialist": ["Remote Consultations", "eHealth"],
-            "Biomedical Engineer": ["Medical Devices", "Prosthetics"],
-            "Pharmacovigilance Expert": ["Drug Safety", "Clinical Trials"]
+            "Medical AI Researcher": ["AI in Healthcare", "Medical Imaging AI","General Thoughts"],
+            "Telemedicine Specialist": ["Remote Consultations", "eHealth","General Thoughts"],
+            "Biomedical Engineer": ["Medical Devices", "Prosthetics","General Thoughts"],
+            "Pharmacovigilance Expert": ["Drug Safety", "Clinical Trials","General Thoughts"]
         },
         "Mental Health & Wellness": {
-            "Psychologist": ["Therapy", "Mental Health Awareness"],
-            "Psychiatrist": ["Neuropharmacology", "Cognitive Science"]
+            "Psychologist": ["Therapy", "Mental Health Awareness","General Thoughts"],
+            "Psychiatrist": ["Neuropharmacology", "Cognitive Science","General Thoughts"]
         }
     },
     "Engineering & Technology": {
         "Mechanical Engineering": {
-            "Automotive Engineer": ["EV Technology", "Autonomous Vehicles"],
-            "Aerospace Engineer": ["Rocket Propulsion", "Space Tech"],
-            "Manufacturing Engineer": ["Lean Manufacturing", "3D Printing"]
+            "Automotive Engineer": ["EV Technology", "Autonomous Vehicles","General Thoughts"],
+            "Aerospace Engineer": ["Rocket Propulsion", "Space Tech","General Thoughts"],
+            "Manufacturing Engineer": ["Lean Manufacturing", "3D Printing","General Thoughts"]
         },
         "Electrical & Electronics": {
-            "Renewable Energy Engineer": ["Solar Tech", "Battery Storage"],
-            "Chip Design Engineer": ["Semiconductors", "FPGA"],
-            "Power Systems Engineer": ["Smart Grids", "Energy Efficiency"]
+            "Renewable Energy Engineer": ["Solar Tech", "Battery Storage","General Thoughts"],
+            "Chip Design Engineer": ["Semiconductors", "FPGA","General Thoughts"],
+            "Power Systems Engineer": ["Smart Grids", "Energy Efficiency","General Thoughts"]
         },
         "Civil & Structural Engineering": {
-            "Structural Engineer": ["Earthquake Resistant Design", "Bridges"],
-            "Smart Cities Engineer": ["Urban Planning", "GreenTech"]
+            "Structural Engineer": ["Earthquake Resistant Design", "Bridges","General Thoughts"],
+            "Smart Cities Engineer": ["Urban Planning", "GreenTech","General Thoughts"]
         }
     },
     "Business & Finance": {
         "Entrepreneurship & Startups": {
-            "Tech Startup Founder": ["Product Market Fit", "Angel Investment"],
-            "SaaS Founder": ["Subscription Models", "Scaling"],
-            "FinTech Innovator": ["Digital Banking", "DeFi"],
-            "EdTech Entrepreneur": ["AI Tutors", "Online Learning"],
-            "GreenTech Founder": ["Sustainability", "Carbon Neutrality"]
+            "Tech Startup Founder": ["Product Market Fit", "Angel Investment","General Thoughts"],
+            "SaaS Founder": ["Subscription Models", "Scaling","General Thoughts"],
+            "FinTech Innovator": ["Digital Banking", "DeFi","General Thoughts"],
+            "EdTech Entrepreneur": ["AI Tutors", "Online Learning","General Thoughts"],
+            "GreenTech Founder": ["Sustainability", "Carbon Neutrality","General Thoughts"]
         },
         "Marketing & Sales": {
-            "Growth Hacker": ["Viral Marketing", "User Retention"],
-            "SEO Specialist": ["Google Ranking", "Keyword Optimization"],
-            "Social Media Manager": ["Brand Engagement", "Content Strategy"],
-            "Sales Executive": ["Negotiation", "Lead Generation"]
+            "Growth Hacker": ["Viral Marketing", "User Retention","General Thoughts"],
+            "SEO Specialist": ["Google Ranking", "Keyword Optimization","General Thoughts"],
+            "Social Media Manager": ["Brand Engagement", "Content Strategy","General Thoughts"],
+            "Sales Executive": ["Negotiation", "Lead Generation","General Thoughts"]
         },
         "Finance & Investment": {
-            "Financial Analyst": ["Stock Market", "Wealth Management"],
-            "Risk Manager": ["Portfolio Management", "Financial Compliance"],
-            "Cryptocurrency Analyst": ["Bitcoin Trends", "NFT Market"]
+            "Financial Analyst": ["Stock Market", "Wealth Management","General Thoughts"],
+            "Risk Manager": ["Portfolio Management", "Financial Compliance","General Thoughts"],
+            "Cryptocurrency Analyst": ["Bitcoin Trends", "NFT Market","General Thoughts"]
         }
     },
     "Legal & Government": {
         "Law & Compliance": {
-            "Corporate Lawyer": ["Mergers & Acquisitions", "IP Law"],
-            "Human Rights Lawyer": ["Ethical Justice", "Advocacy"],
-            "Legal Tech Consultant": ["AI in Law", "Blockchain Contracts"]
+            "Corporate Lawyer": ["Mergers & Acquisitions", "IP Law","General Thoughts"],
+            "Human Rights Lawyer": ["Ethical Justice", "Advocacy","General Thoughts"],
+            "Legal Tech Consultant": ["AI in Law", "Blockchain Contracts","General Thoughts"]
         },
         "Government & Public Policy": {
-            "IAS Officer": ["Policy Implementation", "Governance"],
-            "Diplomat": ["Foreign Relations", "International Trade"],
-            "Urban Planner": ["Smart Cities", "Public Transportation"]
+            "IAS Officer": ["Policy Implementation", "Governance","General Thoughts"],
+            "Diplomat": ["Foreign Relations", "International Trade","General Thoughts"],
+            "Urban Planner": ["Smart Cities", "Public Transportation","General Thoughts"]
         }
     },
     "Media, Design & Arts": {
     "Media & Journalism": {
-        "Investigative Journalist": ["Political Reporting", "Fact Checking", "Breaking News"],
-        "Podcaster": ["Audio Content", "Storytelling", "Engagement Strategies"],
-        "Public Relations Expert": ["Brand Management", "Crisis Handling", "Media Outreach"]
+        "Investigative Journalist": ["Political Reporting", "Fact Checking", "Breaking News","General Thoughts"],
+        "Podcaster": ["Audio Content", "Storytelling", "Engagement Strategies","General Thoughts"],
+        "Public Relations Expert": ["Brand Management", "Crisis Handling", "Media Outreach","General Thoughts"]
     },
     "Content Creation & Digital Media": {
-        "YouTuber": ["Video Content", "Subscriber Growth", "Monetization"],
-        "Social Media Influencer": ["Instagram Growth", "Reels/TikTok Strategies", "Brand Collabs"],
-        "Content Creator": ["Content Strategy", "Engagement Metrics", "Niche Selection"],
-        "Live Streamer (Twitch, YouTube, Kick)": ["Gaming", "Live Interaction", "Sponsorships"]
+        "YouTuber": ["Video Content", "Subscriber Growth", "Monetization","General Thoughts"],
+        "Social Media Influencer": ["Instagram Growth", "Reels/TikTok Strategies", "Brand Collabs","General Thoughts"],
+        "Content Creator": ["Content Strategy", "Engagement Metrics", "Niche Selection","General Thoughts"],
+        "Live Streamer (Twitch, YouTube, Kick)": ["Gaming", "Live Interaction", "Sponsorships","General Thoughts"]
     },
     "Video Editing & Production": {
-        "Video Editor": ["Adobe Premiere Pro", "Final Cut Pro", "Post-Production"],
-        "Motion Graphics Artist": ["After Effects", "3D Animation", "Visual Effects"],
-        "Cinematographer": ["Camera Techniques", "Lighting", "Color Grading"],
-        "Film Director": ["Scriptwriting", "Storyboarding", "Directing Actors"]
+        "Video Editor": ["Adobe Premiere Pro", "Final Cut Pro", "Post-Production","General Thoughts"],
+        "Motion Graphics Artist": ["After Effects", "3D Animation", "Visual Effects","General Thoughts"],
+        "Cinematographer": ["Camera Techniques", "Lighting", "Color Grading","General Thoughts"],
+        "Film Director": ["Scriptwriting", "Storyboarding", "Directing Actors","General Thoughts"]
     },
     "Graphic Design & Animation": {
-        "Graphic Designer": ["Typography", "Illustration", "Branding"],
-        "3D Animator": ["Blender", "Maya", "CGI & VFX"],
-        "UI/UX Designer": ["Wireframes", "Prototyping", "User Interaction"]
+        "Graphic Designer": ["Typography", "Illustration", "Branding","General Thoughts"],
+        "3D Animator": ["Blender", "Maya", "CGI & VFX","General Thoughts"],
+        "UI/UX Designer": ["Wireframes", "Prototyping", "User Interaction","General Thoughts"]
     },
     "Gaming Industry & Esports": {
-        "Game Designer": ["Level Design", "Narrative Development", "Game Mechanics"],
-        "Esports Manager": ["Competitive Gaming", "Sponsorships", "Team Management"],
-        "Gaming Content Creator": ["Let’s Plays", "Game Streaming", "Twitch Growth"]
+        "Game Designer": ["Level Design", "Narrative Development", "Game Mechanics","General Thoughts"],
+        "Esports Manager": ["Competitive Gaming", "Sponsorships", "Team Management","General Thoughts"],
+        "Gaming Content Creator": ["Let’s Plays", "Game Streaming", "Twitch Growth","General Thoughts"]
     }
 },
     "Freelancing & Remote Work": {
         "Freelance Tech": {
-            "Freelance Developer": ["Remote Work", "Client Management"],
-            "Freelance UX Designer": ["Wireframes", "Prototyping"],
-            "Freelance Cybersecurity Consultant": ["Pen Testing", "Data Privacy"]
+            "Freelance Developer": ["Remote Work", "Client Management","General Thoughts"],
+            "Freelance UX Designer": ["Wireframes", "Prototyping","General Thoughts"],
+            "Freelance Cybersecurity Consultant": ["Pen Testing", "Data Privacy","General Thoughts"]
         },
         "Freelance Creative": {
-            "Freelance Writer": ["SEO Blogs", "Ghostwriting"],
-            "Freelance Photographer": ["Photo Editing", "Composition"],
-            "Freelance Filmmaker": ["Short Films", "Content Monetization"]
+            "Freelance Writer": ["SEO Blogs", "Ghostwriting","General Thoughts"],
+            "Freelance Photographer": ["Photo Editing", "Composition","General Thoughts"],
+            "Freelance Filmmaker": ["Short Films", "Content Monetization","General Thoughts"]
         }
     }
 }
