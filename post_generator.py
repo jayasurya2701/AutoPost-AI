@@ -1,3 +1,4 @@
+import random
 from llm_helper import llm
 from few_shot import FewShotPosts
 from preprocess import correct_tanglish_spelling
@@ -13,7 +14,6 @@ def get_length_str(length):
     }
     return length_map.get(length, "6 to 10 lines")  # Default to Medium
 
-
 def generate_post(post_length, language, topic, profession, post_reason, custom_keywords=""):
     """
     Generates a LinkedIn post based on user inputs.
@@ -22,11 +22,11 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
     - **language**: English or Tanglish
     - **topic**: The subject of the post
     - **profession**: User's selected profession
-    - **post_reason**: Context for why this post is being generated
+    - **post_reason**: The purpose of the post (e.g., "Completed a Course", "Landed a New Job")
     - **custom_keywords**: Additional keywords to fine-tune the post
 
     Returns:
-        A generated LinkedIn post as a string.
+        A unique LinkedIn post as a string.
     """
 
     # ✅ Prevent Empty Inputs
@@ -39,26 +39,88 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
 
     length_str = get_length_str(post_length)
 
-    prompt = f"""
-    🎯 **Generate a professional, engaging LinkedIn post.**
-    
-    🏆 **Post Context**: {post_reason}
-    💼 **Profession**: {profession}
-    🔹 **Topic**: {topic}
-    📏 **Length**: {length_str}
-    🔑 **Custom Keywords**: {custom_keywords if custom_keywords else "None"}
+    # **Dynamically Varying Prompts Based on Purpose**
+    prompt_variations = {
+        "Completed a Course": [
+            f"""
+            🎓 **Generate a professional, insightful LinkedIn post celebrating course completion.**
+            
+            📚 **Course Accomplished**: {topic}
+            💼 **Profession**: {profession}
+            📏 **Post Length**: {length_str}
+            🔍 **Key Learnings & Takeaways**: {custom_keywords if custom_keywords else "None"}
 
-    📝 **Guidelines**:
-    - Keep the post **engaging, professional, and insightful**.
-    - If **Tanglish**, mix Tamil and English while ensuring readability in **English script**.
-    - The post should be **authentic and valuable** to the audience.
-    """
+            🎯 **Guidelines**:
+            - Highlight **key takeaways** from the course.
+            - Express excitement for **what's next** (future learning/career application).
+            - If **Tanglish**, mix Tamil & English fluently.
+            """,
+            
+            f"""
+            🎉 **I just completed a course!** 🚀
+
+            ✅ **Course**: {topic}  
+            💼 **My Profession**: {profession}  
+            📏 **Post Length**: {length_str}  
+            🔑 **Extra Insights**: {custom_keywords if custom_keywords else "None"}
+
+            🔥 **Key Learnings**:
+            - What did I find most exciting?
+            - How will this course impact my career?
+            - What’s my next step?
+
+            Let's celebrate achievements & keep learning together! 🚀
+            """
+        ],
+        "Landed a New Job": [
+            f"""
+            🚀 **Big Career Update!**
+            
+            🎉 I’m thrilled to announce that I’ve just landed a new job as a **{profession}**! 
+
+            Over the past months, I have worked hard on {topic}, and now I finally have the chance to apply my skills in a professional setting. 
+
+            Looking forward to this exciting new journey! 🚀
+            """,
+
+            f"""
+            💼 **New Beginnings!**  
+
+            I’m excited to start my new role as a **{profession}**! My journey in {topic} has been an incredible learning experience, and I can’t wait to contribute my skills.  
+
+            **What’s next?**  
+            - 🚀 Growing as a {profession}  
+            - 🎯 Building expertise in {topic}  
+            - 🤝 Connecting with amazing professionals
+
+            If you’re in {topic}, let’s connect and grow together! #Networking
+            """
+        ]
+    }
+
+    # ✅ Choose a random prompt variation
+    prompt = random.choice(prompt_variations.get(post_reason, [
+        f"""
+        🎯 **Create a LinkedIn post that is professional, inspiring, and engaging.**
+        
+        🏆 **Post Context**: {post_reason}
+        💼 **Profession**: {profession}
+        🔹 **Topic**: {topic}
+        📏 **Length**: {length_str}
+        🔑 **Custom Keywords**: {custom_keywords if custom_keywords else "None"}
+        
+        📝 **Guidelines**:
+        - The tone should match the excitement of the user's milestone.
+        - Avoid generic phrases. The post should be **authentic, engaging, and unique**.
+        - If **Tanglish**, mix Tamil and English naturally (English script).
+        """
+    ]))
 
     try:
         # ✅ Retrieve relevant example posts
         examples = few_shot.get_filtered_posts(post_length, language, topic)
         if examples:
-            prompt += "\n\n📌 **Example Writing Style**:\n"
+            prompt += "\n\n📌 **Example Writing Styles:**"
             for i, post in enumerate(examples):
                 prompt += f"\n\n**Example {i+1}:**\n{post['text']}"
                 if i == 1:  # Limit to two examples
@@ -86,79 +148,56 @@ def generate_fallback_post(topic, profession, post_reason, post_length, language
     """
     Generates a fallback post when LLM fails.
     
-    - Uses a structured manual format to ensure user still gets a useful post.
+    - Uses a structured manual format to ensure users still get a useful post.
     - Tanglish posts are generated manually to ensure natural language flow.
     """
 
     length_str = get_length_str(post_length)
 
-    if language == "English":
-        fallback_template = f"""
-        🚀 Exciting Update! 🚀
+    english_fallback_templates = [
+        f"""
+        🎉 Big news! I just {post_reason.lower()} in **{topic}** as a **{profession}**. 
 
-        As a **{profession}**, I’ve been exploring **{topic}** lately, and it's been an incredible journey!
-        
-        Whether it's **{post_reason}**, or simply a passion for continuous learning, this has been a rewarding experience.
-        
-        The field of {topic} is evolving rapidly, and I’m eager to keep up with new trends.
-        
-        What’s your take on {topic}? Let’s discuss! 💡 #CareerGrowth #Networking
-        """
+        This journey has been challenging yet rewarding. The insights I gained from {topic} are invaluable, and I'm eager to apply them in real-world projects. 
 
-    else:  # Tanglish version
-        fallback_template = f"""
-        🚀 Vera Level Update! 🚀
+        Looking forward to learning more and connecting with like-minded professionals. Let’s grow together! 🚀 #CareerGrowth""",
 
-        **{profession}** ah irunthu **{topic}** pathi kathukitu iruken, semma interesting journey da!  
-        
-        **{post_reason}** nu solli kathukitu poitu iruken, romba nalla experience!  
-        
-        **{topic}** ippo vera level ah maari iruku, update aganum nu try panren!  
-        
-        **Ungaloda opinion enna? Let's discuss!** 💡 #GrowthMindset #Networking
-        """
+        f"""
+        🔥 Exciting milestone! As a **{profession}**, I’ve recently {post_reason.lower()} in **{topic}**. 
 
-    return fallback_template
+        This experience has deepened my knowledge, and I can’t wait to contribute more to this field. 
 
+        If you're also passionate about {topic}, let's connect and exchange ideas! 💡 #Networking""",
 
-def get_prompt(length, language, topic, profession, custom_keywords):
-    """
-    Constructs a detailed prompt for generating a LinkedIn post.
+        f"""
+        🚀 Feeling proud! I’ve just {post_reason.lower()} in **{topic}**, marking a major step in my journey as a **{profession}**. 
 
-    - **length**: Short, Medium, or Long
-    - **language**: English or Tanglish
-    - **topic**: Topic of the post
-    - **profession**: User's profession
-    - **custom_keywords**: Additional keywords for post refinement
+        Every day is a learning opportunity, and I’m excited about what’s next. 
 
-    Returns:
-        A formatted prompt string.
-    """
+        Who else is exploring {topic}? Let’s discuss! 🌱 #Learning"""
+    ]
 
-    length_str = get_length_str(length)
+    tanglish_fallback_templates = [
+        f"""
+        🎉 Vera level update! **Naan {topic} la oru periya step eduthiruken** as a **{profession}**!  
 
-    prompt = f"""
-    🎯 **Generate a LinkedIn post based on the following details**:
+        **{post_reason}** panna romba kashtam, aana super experience ah irundhuchu. Innum nariya kathukanum nu feel pannuren.  
 
-    🔹 **Topic**: {topic}
-    📏 **Length**: {length_str}
-    🌍 **Language**: {language}
-    💼 **Profession**: {profession}
-    🔑 **Custom Keywords**: {custom_keywords if custom_keywords else "None"}
+        **Ungaloda experience enna?** Let’s connect! 🚀 #Networking""",
 
-    📝 **Guidelines**:
-    - Ensure the post is **engaging, professional, and insightful**.
-    - If **Tanglish**, mix Tamil and English while ensuring readability in **English script**.
-    - The post should be **thought-provoking and relatable**.
-    """
+        f"""
+        🔥 Semma proud moment! **Naan {topic} pathi deep ah kathukiten** as a **{profession}**.  
 
-    # Retrieve relevant example posts
-    examples = few_shot.get_filtered_posts(length, language, topic)
-    if examples:
-        prompt += "\n\n📌 **Example Writing Style**:\n"
-        for i, post in enumerate(examples):
-            prompt += f"\n\n**Example {i+1}:**\n{post['text']}"
-            if i == 1:  # Limit to two examples
-                break
+        **{post_reason}** panna vera level feel! Innum nalla improve aaganum nu wait pannitu iruken.  
 
-    return prompt
+        **Neenga enna nenekreenga? Let's discuss!** 💡 #CareerGrowth""",
+
+        f"""
+        🚀 Enna oru journey! **{topic} la periya growth achieve panniten** as a **{profession}**.  
+
+        **{post_reason}** nu solla super happy ah iruken. Innum nariya updates share pannuren!  
+
+        **Let’s connect and grow together!** 🌱 #Networking"""
+    ]
+
+    return random.choice(tanglish_fallback_templates) if language == "Tanglish" else random.choice(english_fallback_templates)
