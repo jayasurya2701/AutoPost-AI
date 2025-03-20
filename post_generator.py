@@ -26,7 +26,7 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
     - **custom_keywords**: Additional keywords to fine-tune the post
 
     Returns:
-        A generated LinkedIn post as a string or an error message.
+        A generated LinkedIn post as a string.
     """
 
     # ✅ Prevent Empty Inputs
@@ -67,9 +67,9 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
         # ✅ Generate post using LLM
         response = llm.generate(prompt)
 
-        # ✅ Handle empty response
-        if not response:
-            return "⚠️ Error: No response received from LLM!"
+        # ✅ Handle empty or invalid response
+        if not response or not isinstance(response, str):
+            return generate_fallback_post(topic, profession, post_reason, post_length, language)
 
         # ✅ Apply Tanglish Spelling Correction (if needed)
         if language == "Tanglish":
@@ -77,8 +77,36 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
 
         return response
 
-    except Exception as e:
-        return f"⚠️ Error generating post: {str(e)}"
+    except Exception:
+        # ✅ Fallback post in case of any LLM failure
+        return generate_fallback_post(topic, profession, post_reason, post_length, language)
+
+
+def generate_fallback_post(topic, profession, post_reason, post_length, language):
+    """
+    Generates a fallback post when LLM fails.
+    
+    - Uses a structured manual format to ensure user still gets a useful post.
+    """
+    length_str = get_length_str(post_length)
+
+    fallback_template = f"""
+    🚀 Exciting Update! 🚀
+
+    As a **{profession}**, I’ve been exploring **{topic}** lately, and it's been an incredible journey!
+    
+    Whether it's **{post_reason}**, or simply a passion for continuous learning, this has been a rewarding experience.
+    
+    The field of {topic} is evolving rapidly, and I’m eager to keep up with new trends.
+    
+    What’s your take on {topic}? Let’s discuss! 💡 #CareerGrowth #Networking
+    """
+
+    # ✅ Apply Tanglish Spelling Correction (if needed)
+    if language == "Tanglish":
+        fallback_template = correct_tanglish_spelling(fallback_template)
+
+    return fallback_template
 
 
 def get_prompt(length, language, topic, profession, custom_keywords):
