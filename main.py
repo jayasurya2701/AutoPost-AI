@@ -200,22 +200,41 @@ def main():
         st.session_state["selected_category"] = next(iter(professions.keys()))  # First valid category
 
     if "selected_subcategory" not in st.session_state:
-        st.session_state["selected_subcategory"] = next(iter(professions[st.session_state["selected_category"]].keys()))  # First valid subcategory
+        st.session_state["selected_subcategory"] = ""
 
     if "selected_profession" not in st.session_state:
-        st.session_state["selected_profession"] = next(iter(professions[st.session_state["selected_category"]][st.session_state["selected_subcategory"]].keys()))  # First valid profession
+        st.session_state["selected_profession"] = ""
 
-    # 🔹 **Horizontal Layout for User-Friendly Experience**
+    # **Horizontal Layout for User-Friendly Experience**
     col1, col2, col3 = st.columns(3)
 
     with col1:
         selected_category = st.selectbox(
             "📂 Select Category:", 
-            options=list(professions.keys()),  # Convert dict keys to list for indexing
+            options=list(professions.keys()),  
             index=list(professions.keys()).index(st.session_state["selected_category"])
         )
         st.session_state["selected_category"] = selected_category  # Update session state
 
+    # **Handling "Personal Growth" category separately**
+    if selected_category == "Personal Growth":
+        topics = list(professions[selected_category].keys())
+        selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
+        selected_language = st.selectbox("📝 Select Language:", options=language_options)
+
+        col4, col5 = st.columns([1, 3])
+        with col4:
+            selected_length = st.radio("📏 Select Post Length:", options=length_options, horizontal=True)
+        with col5:
+            custom_keywords = st.text_input("🔑 Add Specific Keywords (Optional)", help="Enter keywords to fine-tune the generated post.")
+
+        # Generate Post Button
+        if st.button("⚡ Generate Post"):
+            post = generate_post(selected_length, selected_language, selected_topic, "Personal Growth", custom_keywords)
+            st.write(post)
+        return  # Exit function early since subcategory/profession is not needed
+
+    # **For other categories (Technical, Business, etc.)**
     with col2:
         subcategories = list(professions[selected_category].keys())  # Get valid subcategories
         selected_subcategory = st.selectbox(
@@ -226,12 +245,7 @@ def main():
         st.session_state["selected_subcategory"] = selected_subcategory  # Update session state
 
     with col3:
-        # Ensure selected subcategory is valid before fetching professions
-        if selected_subcategory in professions[selected_category]:
-            professions_list = list(professions[selected_category][selected_subcategory].keys())  # Get valid professions
-        else:
-            professions_list = []  # Default empty list if invalid
-
+        professions_list = list(professions[selected_category][selected_subcategory].keys()) if selected_subcategory in professions[selected_category] else []
         selected_profession = st.selectbox(
             "💼 Select Your Profession:", 
             options=professions_list,
