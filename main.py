@@ -186,6 +186,113 @@ professions = {
     }
 }
 
+# 🎯 **Why This Post is Generated** (Context)
+post_reasons = [
+    # ✅ Career Achievements & Milestones
+    "Completed a Course",
+    "Achieved an Internship",
+    "Landed a New Job",
+    "Got a Promotion",
+    "Transitioned to a New Industry",
+    "Started a Side Hustle",
+    "Won a Hackathon",
+    "Reached a Career Milestone",
+    "Started My Own Business",
+    "Secured a Major Deal or Client",
+    "Reached a New Certification Level",
+    "Spoke at an Industry Event",
+    "Graduated from College or University",
+    "Completed a Professional Certification",
+    "Started a New Leadership Role",
+    "Announcing My Resignation & Next Steps",
+    "Completed a Significant Project",
+    
+    # ✅ Industry Insights & Thought Leadership
+    "Sharing Industry Insights",
+    "Sharing Research & Innovations",
+    "Providing a Market Trend Analysis",
+    "Commenting on Emerging Technologies",
+    "Breaking Down a Complex Topic for Beginners",
+    "Debunking a Common Myth in My Industry",
+    "Sharing a Recent Study or Whitepaper",
+    "Explaining Lessons from a Past Experience",
+    
+    # ✅ Personal Growth & Reflection
+    "Personal Reflection & Growth",
+    "Sharing a Lesson from My Career",
+    "Overcoming a Major Challenge",
+    "How I Recovered from Failure",
+    "Lessons from a Recent Setback",
+    "What I Would Tell My Younger Self",
+    "Discussing Work-Life Balance",
+    "My Journey in Personal Branding",
+    "What I Learned from Changing Industries",
+    
+    # ✅ Team & Community Engagement
+    "Celebrating a Team Achievement",
+    "Giving Back to the Community",
+    "Announcing a Volunteering Experience",
+    "Recognizing a Mentor or Role Model",
+    "Expressing Gratitude to My Network",
+    "Launching a Mentorship Initiative",
+    "Supporting a Social Cause or Movement",
+    "Highlighting an Inspiring Colleague",
+    "Showcasing a Collaborative Effort",
+    
+    # ✅ Events, Speaking & Public Recognition
+    "Speaking at an Industry Conference",
+    "Participating in a Panel Discussion",
+    "Attending a Major Networking Event",
+    "Recognizing an Award or Honor",
+    "Getting Featured in Media or Articles",
+    "Publishing My First (or Latest) Article",
+    "Hosting a Webinar or Workshop",
+    "Launching a New Podcast or YouTube Series",
+    "Guest Appearing on a Podcast",
+    
+    # ✅ Company & Organizational Updates
+    "Announcing My Company’s Growth",
+    "Sharing My Company’s New Product Launch",
+    "Introducing a New Initiative at Work",
+    "Highlighting My Organization’s Culture",
+    "Encouraging People to Join My Company",
+    "Welcoming New Team Members",
+    "Announcing a Company Achievement",
+    
+    # ✅ Job Search & Career Development
+    "Sharing My Job Search Experience",
+    "Seeking Career Advice from My Network",
+    "Announcing an Open Job Position",
+    "Asking for Referrals or Recommendations",
+    "My Experience with Job Interviews",
+    "Discussing Salary Negotiations",
+    
+    # ✅ Freelancing & Entrepreneurship
+    "Announcing My Freelance Journey",
+    "Launching a New Service or Offering",
+    "Explaining How I Got My First Client",
+    "Lessons from Building My Own Business",
+    "How I Handle Client Relationships",
+    
+    # ✅ Productivity & Work Strategies
+    "Sharing My Daily Productivity Routine",
+    "Discussing Time Management Hacks",
+    "How I Improved My Work-Life Balance",
+    "Breaking Down My Workflow & Tools",
+    
+    # ✅ Challenges, Failures & Real Talk
+    "What No One Talks About in My Industry",
+    "Lessons from My Biggest Career Mistake",
+    "How I Bounced Back from a Layoff",
+    "When Things Didn't Go as Planned",
+    
+    # ✅ Celebrating Others & Engaging the Network
+    "Congratulating Someone in My Network",
+    "Asking My Network a Thought-Provoking Question",
+    "Highlighting an Underrated Industry Trend",
+    "Thanking Someone for Their Help",
+]
+
 # Post Length & Language Options
 length_options = ["Short", "Medium", "Long"]
 language_options = ["English", "Tanglish"]
@@ -221,6 +328,9 @@ def main():
         topics = list(professions[selected_category].keys())
         selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
         selected_language = st.selectbox("📝 Select Language:", options=language_options)
+        
+        # **Why This Post is Generated**
+        selected_reason = st.selectbox("🤔 Why is this post generated?", options=post_reasons)
 
         col4, col5 = st.columns([1, 3])
         with col4:
@@ -230,7 +340,7 @@ def main():
 
         # Generate Post Button
         if st.button("⚡ Generate Post"):
-            post = generate_post(selected_length, selected_language, selected_topic, "Personal Growth", custom_keywords)
+            post = generate_post(selected_length, selected_language, selected_topic, "Personal Growth", custom_keywords, selected_reason)
             st.write(post)
         return  # Exit function early since subcategory/profession is not needed
 
@@ -263,6 +373,9 @@ def main():
     with col5:
         selected_language = st.selectbox("📝 Select Language:", options=language_options)
 
+    # **Why This Post is Generated**
+    selected_reason = st.selectbox("🤔 Why is this post generated?", options=post_reasons)
+
     # Length & Keywords - Aligned Horizontally
     col6, col7 = st.columns([1, 3])
 
@@ -274,7 +387,7 @@ def main():
 
     # Generate Post Button
     if st.button("⚡ Generate Post"):
-        post = generate_post(selected_length, selected_language, selected_topic, selected_profession, custom_keywords)
+        post = generate_post(selected_length, selected_language, selected_topic, selected_profession, custom_keywords, selected_reason)
         st.write(post)
 
 if __name__ == "__main__":
