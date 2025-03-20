@@ -172,7 +172,7 @@ professions = {
         }
     },
     
-    "Personal Growth & Soft Skills": {
+    "Personal Growth": {
         "Motivation": ["Inspiration", "Self Improvement", "Growth Mindset"],
         "Mental Health": ["Job Search Anxiety", "Stress Management", "Work-Life Balance"],
         "Networking": ["Building Connections", "Professional Networking", "Socializing"],
@@ -194,15 +194,29 @@ def main():
     st.subheader("🚀 LinkedIn Post Generator")
     fs = FewShotPosts()
 
-    # Maintain state for selections
+    # **Ensure state exists before accessing**
     if "selected_category" not in st.session_state:
         st.session_state["selected_category"] = list(professions.keys())[0]
 
-    if "selected_subcategory" not in st.session_state:
-        st.session_state["selected_subcategory"] = list(professions[st.session_state["selected_category"]].keys())[0]
+    selected_category = st.session_state["selected_category"]
 
-    if "selected_profession" not in st.session_state:
-        st.session_state["selected_profession"] = list(professions[st.session_state["selected_category"]][st.session_state["selected_subcategory"]].keys())[0]
+    if selected_category not in professions:
+        selected_category = list(professions.keys())[0]
+        st.session_state["selected_category"] = selected_category
+
+    subcategories = list(professions[selected_category].keys())
+
+    if "selected_subcategory" not in st.session_state or st.session_state["selected_subcategory"] not in subcategories:
+        st.session_state["selected_subcategory"] = subcategories[0]
+
+    selected_subcategory = st.session_state["selected_subcategory"]
+
+    professions_list = list(professions[selected_category][selected_subcategory].keys()) if selected_subcategory in professions[selected_category] else []
+
+    if "selected_profession" not in st.session_state or st.session_state["selected_profession"] not in professions_list:
+        st.session_state["selected_profession"] = professions_list[0] if professions_list else ""
+
+    selected_profession = st.session_state["selected_profession"]
 
     # 🔹 **Horizontal Layout for User-Friendly Experience**
     col1, col2, col3 = st.columns(3)
@@ -213,32 +227,33 @@ def main():
             options=professions.keys(),
             index=list(professions.keys()).index(st.session_state["selected_category"])
         )
-        st.session_state["selected_category"] = selected_category  # Update state
+        st.session_state["selected_category"] = selected_category  
 
     with col2:
-        subcategories = list(professions[selected_category].keys())
         selected_subcategory = st.selectbox(
             "📁 Select Subcategory:", 
             options=subcategories,
-            index=subcategories.index(st.session_state["selected_subcategory"]) if st.session_state["selected_subcategory"] in subcategories else 0
+            index=subcategories.index(st.session_state["selected_subcategory"])
         )
-        st.session_state["selected_subcategory"] = selected_subcategory  # Update state
+        st.session_state["selected_subcategory"] = selected_subcategory  
 
     with col3:
-        professions_list = list(professions[selected_category][selected_subcategory].keys())
-        selected_profession = st.selectbox(
-            "💼 Select Your Profession / Topic:", 
-            options=professions_list,
-            index=professions_list.index(st.session_state["selected_profession"]) if st.session_state["selected_profession"] in professions_list else 0
-        )
-        st.session_state["selected_profession"] = selected_profession  # Update state
+        if professions_list:
+            selected_profession = st.selectbox(
+                "💼 Select Your Profession / Topic:", 
+                options=professions_list,
+                index=professions_list.index(st.session_state["selected_profession"])
+            )
+            st.session_state["selected_profession"] = selected_profession
+        else:
+            st.warning("⚠️ No professions available for this subcategory.")
 
-    # **Align topic & language selections in one row for clarity**
+    # **Topic & Language selections in one row**
     col4, col5 = st.columns(2)
     
     with col4:
-        topics = professions[selected_category][selected_subcategory][selected_profession]
-        selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
+        topics = professions[selected_category][selected_subcategory][selected_profession] if selected_profession else []
+        selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics) if topics else st.warning("⚠️ No topics available.")
     
     with col5:
         selected_language = st.selectbox("📝 Select Language:", options=language_options)
@@ -254,8 +269,13 @@ def main():
 
     # **Generate Post Button**
     if st.button("⚡ Generate Post"):
-        post = generate_post(selected_length, selected_language, selected_topic, selected_profession, custom_keywords)
-        st.write(post)
+        if not selected_profession:
+            st.error("❌ Please select a valid profession.")
+        elif not topics:
+            st.error("❌ No discussion topics available. Please select a different profession.")
+        else:
+            post = generate_post(selected_length, selected_language, selected_topic, selected_profession, custom_keywords)
+            st.write(post)
 
 if __name__ == "__main__":
     main()
