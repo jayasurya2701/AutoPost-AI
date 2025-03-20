@@ -11,23 +11,34 @@ load_dotenv()
 st.sidebar.header("🔐 Enter LLM API Key")
 user_api_key = st.sidebar.text_input("API Key", type="password")
 
-# Store API key in session state (secure access)
 if user_api_key:
     os.environ["GROQ_API_KEY"] = user_api_key
     st.sidebar.success("✅ API Key Set Successfully!")
 else:
     st.sidebar.warning("⚠️ Please enter your API key to generate posts.")
 
-# Profession categories, subcategories, and discussion topics
+# 🎯 AI Chatbot Topics
+chatbot_topics = {
+    "Motivation": ["Career growth", "Perseverance", "Success mindset", "Overcoming self-doubt"],
+    "Mental Health": ["Stress management", "Work-life balance", "Handling anxiety"],
+    "Networking": ["Building connections", "Engaging with professionals", "Personal branding"],
+    "Self Improvement": ["Learning new skills", "Time management", "Confidence building"],
+    "Rejections": ["Overcoming failures", "Job search setbacks", "Resilience"],
+    "Workplace Success": ["Excelling at work", "Standing out in workplace", "Asking for a raise"],
+    "Leadership & Growth": ["Becoming a leader", "Decision-making skills", "Inspiring others"],
+    "Entrepreneurship": ["Starting a business", "Side hustles", "Scaling a startup"],
+    "Productivity": ["How to work smarter", "Best productivity hacks", "Morning routines"],
+    "Happiness & Fulfillment": ["Finding happiness at work", "Staying positive", "The power of gratitude"],
+}
+
+# 🏆 Profession categories & topics
 professions = {
     "Technical": {
         "IT": {
             "Software Developer": ["Coding", "Debugging", "Software Architecture"],
             "Full Stack Developer": ["Frontend", "Backend", "APIs"],
-            "DevOps Engineer": ["Automation", "CI/CD", "Infrastructure"],
             "Cybersecurity Specialist": ["Security", "Hacking", "Encryption"],
             "Blockchain Developer": ["Blockchain", "Smart Contracts", "DeFi"],
-            "Cloud Engineer": ["AWS", "Azure", "GCP", "Kubernetes"],
             "UI/UX Designer": ["User Experience", "Design", "Prototyping"],
             "Open-Source Contributor": ["GitHub", "Collaboration", "Projects"]
         },
@@ -42,6 +53,7 @@ professions = {
             "Cloud Engineer": ["AWS", "Azure", "GCP", "Kubernetes"],
             "Cloud Security Engineer": ["DevSecOps", "CloudSecurity", "Virtualization"],
             "Cloud Solutions Architect": ["Infrastructure", "Serverless", "Networking"]
+            "DevOps Engineer": ["Automation", "CI/CD", "Infrastructure"],
         },
         "Cybersecurity": {
             "Cybersecurity Analyst": ["Threats", "Pentesting", "Encryption"],
@@ -158,10 +170,11 @@ professions = {
     }
 }
 
-length_options = ["Short", "Medium", "Long"]
-language_options = ["English", "Tanglish"]
+# 🎯 UI Layout: **Two Sections**
+col1, col2 = st.columns(2)
 
-def main():
+### **📌 LinkedIn Post Generator - Left Column**
+with col1:
     st.subheader("🚀 LinkedIn Post Generator")
     fs = FewShotPosts()
 
@@ -175,10 +188,10 @@ def main():
     if "selected_profession" not in st.session_state:
         st.session_state["selected_profession"] = list(professions[st.session_state["selected_category"]][st.session_state["selected_subcategory"]].keys())[0]
 
-    # 🔹 **Horizontal Layout for User-Friendly Experience**
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
+    # 🔹 **User-Friendly Horizontal Layout**
+    colA, colB, colC = st.columns(3)
+
+    with colA:
         selected_category = st.selectbox(
             "📂 Select Category:", 
             options=professions.keys(),
@@ -186,7 +199,7 @@ def main():
         )
         st.session_state["selected_category"] = selected_category  # Update state
 
-    with col2:
+    with colB:
         subcategories = list(professions[selected_category].keys())
         selected_subcategory = st.selectbox(
             "📁 Select Subcategory:", 
@@ -195,7 +208,7 @@ def main():
         )
         st.session_state["selected_subcategory"] = selected_subcategory  # Update state
 
-    with col3:
+    with colC:
         professions_list = list(professions[selected_category][selected_subcategory].keys())
         selected_profession = st.selectbox(
             "💼 Select Your Profession:", 
@@ -204,29 +217,46 @@ def main():
         )
         st.session_state["selected_profession"] = selected_profession  # Update state
 
-    # **Align topic & language selections in one row for clarity**
-    col4, col5 = st.columns(2)
+    # **Topic & Language Selection**
+    colD, colE = st.columns(2)
     
-    with col4:
+    with colD:
         topics = professions[selected_category][selected_subcategory][selected_profession]
         selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
     
-    with col5:
-        selected_language = st.selectbox("📝 Select Language:", options=language_options)
+    with colE:
+        selected_language = st.selectbox("📝 Select Language:", options=["English", "Tanglish"])
 
-    # **Length & Keywords - Aligned Horizontally**
-    col6, col7 = st.columns([1, 3])
+    # **Post Length & Keywords**
+    colF, colG = st.columns([1, 3])
     
-    with col6:
-        selected_length = st.radio("📏 Select Post Length:", options=length_options, horizontal=True)
+    with colF:
+        selected_length = st.radio("📏 Select Post Length:", options=["Short", "Medium", "Long"], horizontal=True)
     
-    with col7:
+    with colG:
         custom_keywords = st.text_input("🔑 Add Specific Keywords (Optional)", help="Enter keywords to fine-tune the generated post.")
 
-    # **Generate Post Button**
+    # **Generate Post**
     if st.button("⚡ Generate Post"):
         post = generate_post(selected_length, selected_language, selected_topic, selected_profession, custom_keywords)
         st.write(post)
 
+### **🤖 InspireBot - AI Career Chatbot (Right Column)**
+with col2:
+    st.subheader("🤖 InspireBot - Your AI Career Coach")
+    
+    selected_chatbot_topic = st.selectbox("🧠 Choose a Topic:", options=chatbot_topics.keys())
+    
+    if st.button("✨ Get Career Insights"):
+        insights = f"🔹 {selected_chatbot_topic}: {', '.join(chatbot_topics[selected_chatbot_topic][:3])}..."
+        st.write(insights)
+    
+    user_query = st.text_input("💬 Ask InspireBot (Career & Growth)")
+    
+    if st.button("🚀 Get AI Advice"):
+        chatbot_response = f"Here’s a career tip: {chatbot_topics[selected_chatbot_topic][0]}"
+        st.write(chatbot_response)
+
 if __name__ == "__main__":
     main()
+
