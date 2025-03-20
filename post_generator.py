@@ -13,7 +13,7 @@ def get_length_str(length):
 
 def generate_post(post_length, language, topic, profession, post_reason, custom_keywords=""):
     """
-    Generates a LinkedIn post that **perfectly** matches the user’s inputs.
+    Generates a LinkedIn post that **perfectly matches the user’s inputs**.
 
     - **post_length**: Short, Medium, or Long
     - **language**: English or Tanglish
@@ -36,27 +36,29 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
 
     length_str = get_length_str(post_length)
 
-    # ✅ **Fully Dynamic Prompt (No Templates, Just AI Magic)**
+    # ✅ **Dynamically Constructed Prompt (No Templates, Just AI Thinking)**
     prompt = f"""
-    Generate a **100% unique, highly relevant LinkedIn post** based on the following:
-    
+    You are an expert LinkedIn post writer. Generate a **100% unique, highly relevant LinkedIn post** based on these details:
+
     🏆 **Purpose of Post**: {post_reason}
     💼 **Profession**: {profession}
     🔹 **Topic**: {topic}
     📏 **Length**: {length_str}
     🔑 **Extra Keywords**: {custom_keywords if custom_keywords else "None"}
-
-    **Content Expectations**:
-    - **DO NOT** generate a generic post. The content must be **highly relevant** to {post_reason}.
-    - **DO NOT** make assumptions outside the given details.
-    - The structure should logically follow the purpose (e.g., if it's about "Winning a Hackathon", talk about the journey, teamwork, challenges, and key lessons).
-    - The content should **feel real, natural, and written by a human**.
-    - If **Tanglish**, mix Tamil and English naturally in **English script**.
+    
+    **Post Expectations**:
+    - Ensure the post is **highly relevant to the purpose of the post**.
+    - Structure the content properly. If the purpose is **"Completed a Course"**, mention the learning experience, key takeaways, and excitement for the future.
+    - **DO NOT generate generic text**. Every word should be meaningful and aligned to the purpose.
+    - If **Tanglish**, mix Tamil and English naturally (written in English script).
+    - Use an **engaging style** that will encourage LinkedIn engagement.
+    
+    Generate only the LinkedIn post content, no preambles.
     """
 
     try:
-        # ✅ **Generate post using AI**
-        response = llm.generate(prompt)
+        # ✅ **Generate post using Groq Cloud's Llama 3 model**
+        response = llm.generate(prompt, model="llama3-8b-8192")
 
         # ✅ **Handle any AI failures or empty responses**
         if not response or not isinstance(response, str):
