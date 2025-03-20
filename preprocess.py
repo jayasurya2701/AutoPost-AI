@@ -97,34 +97,59 @@ def enhance_post_with_profession(text, profession):
 
 
 def get_unified_tags(posts_with_metadata):
-    """Unifies tags across all posts using an LLM."""
+    """Unifies tags across all posts using an LLM for better categorization and consistency."""
 
     unique_tags = set()
 
+    # Extract all unique tags from posts
     for post in posts_with_metadata:
-        unique_tags.update(post["tags"])  
+        unique_tags.update(post["tags"])
 
-    unique_tags_list = ", ".join(sorted(unique_tags))  
+    unique_tags_list = ", ".join(sorted(unique_tags))  # Sort to maintain consistency
 
+    # LLM-based unification prompt
     template = '''  
-    Unify the following LinkedIn tags based on similar meanings. Merge redundant ones into broader categories:
-    {tags}  
-    Output in JSON format mapping original tags to unified tags.
+    I will give you a list of tags. You need to unify them with the following rules:  
+
+    🔹 **Rules for Tag Unification:**  
+    1️⃣ Merge similar tags into a single standardized category.  
+       - Example:  
+          - "Fresh Graduates", "Recent Graduates" → **"Freshers"**  
+          - "Job Hunting", "Job Search", "Applying for Jobs" → **"Job Search"**  
+          - "Motivation", "Inspiration", "Career Motivation" → **"Motivation"**  
+          - "Mental Health", "Job Search Anxiety", "Stress Management" → **"Mental Health"**  
+          - "Networking", "Building Connections", "Professional Networking" → **"Networking"**  
+          - "Self Improvement", "Personal Growth", "Career Growth" → **"Self Improvement"**  
+          - "Rejections", "Job Rejections", "Application Rejections" → **"Rejections"**  
+    2️⃣ Each tag should follow **Title Case formatting** (e.g., "Job Search" instead of "job search").  
+    3️⃣ Return a **valid JSON object** mapping original tags to unified tags.  
+       Example Output Format:  
+       ```json
+       {{"Fresh Graduates": "Freshers", "Job Hunting": "Job Search", "Motivation": "Motivation"}}
+       ```
+
+    **List of Tags:**  
+    {tags}
     '''  
 
     pt = PromptTemplate.from_template(template)
     chain = pt | llm
 
-    response = retry_invoke(chain, {"tags": unique_tags_list})
+    response = retry_invoke(chain, {"tags": unique_tags_list})  # Use retry logic
 
     try:
         json_parser = JsonOutputParser()
         res = json_parser.parse(response.content)
+
+        # Ensure all keys exist in mapping (fallback to original if missing)
+        for tag in unique_tags:
+            res.setdefault(tag, tag)
+
+        return res
+
     except OutputParserException:
-        raise OutputParserException("Context too big. Unable to parse unified tags.")
-
-    return res
-
+        print("⚠️ Warning: LLM output parsing failed. Falling back to default mapping.")
+        return {tag: tag for tag in unique_tags}  # Return original tags as fallback
 
 def retry_invoke(chain, input_data, max_retries=3):
     """Retries the LLM call with exponential backoff to handle rate limits."""
