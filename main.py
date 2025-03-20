@@ -164,23 +164,51 @@ language_options = ["English", "Tanglish"]
 def main():
     st.subheader("🚀 LinkedIn Post Generator")
     fs = FewShotPosts()
-    tags = fs.get_tags()
     
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        selected_category = st.selectbox("📂 Select Category:", options=professions.keys())
-    
-    with col2:
-        selected_subcategory = st.selectbox("📁 Select Subcategory:", options=professions[selected_category].keys())
-        selected_profession = st.selectbox("💼 Select Your Profession:", options=professions[selected_category][selected_subcategory].keys())
-    
-    with col3:
-        selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=professions[selected_category][selected_subcategory][selected_profession])
-        selected_language = st.selectbox("📝 Select Language:", options=language_options)
-    
+    # Ensure user selection keys exist to avoid errors
+    if "selected_category" not in st.session_state:
+        st.session_state["selected_category"] = list(professions.keys())[0]
+
+    if "selected_subcategory" not in st.session_state:
+        st.session_state["selected_subcategory"] = list(professions[st.session_state["selected_category"]].keys())[0]
+
+    if "selected_profession" not in st.session_state:
+        st.session_state["selected_profession"] = list(professions[st.session_state["selected_category"]][st.session_state["selected_subcategory"]].keys())[0]
+
+    # Dynamic category selection
+    selected_category = st.selectbox(
+        "📂 Select Category:", 
+        options=professions.keys(),
+        index=list(professions.keys()).index(st.session_state["selected_category"])
+    )
+    st.session_state["selected_category"] = selected_category  # Update state
+
+    # Ensure subcategory exists in selected category
+    subcategories = list(professions[selected_category].keys())
+    selected_subcategory = st.selectbox(
+        "📁 Select Subcategory:", 
+        options=subcategories,
+        index=subcategories.index(st.session_state["selected_subcategory"]) if st.session_state["selected_subcategory"] in subcategories else 0
+    )
+    st.session_state["selected_subcategory"] = selected_subcategory  # Update state
+
+    # Ensure profession exists in selected subcategory
+    professions_list = list(professions[selected_category][selected_subcategory].keys())
+    selected_profession = st.selectbox(
+        "💼 Select Your Profession:", 
+        options=professions_list,
+        index=professions_list.index(st.session_state["selected_profession"]) if st.session_state["selected_profession"] in professions_list else 0
+    )
+    st.session_state["selected_profession"] = selected_profession  # Update state
+
+    # Ensure topics exist in selected profession
+    topics = professions[selected_category][selected_subcategory][selected_profession]
+    selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
+
+    selected_language = st.selectbox("📝 Select Language:", options=language_options)
     selected_length = st.radio("📏 Select Post Length:", options=length_options, horizontal=True)
     custom_keywords = st.text_input("🔑 Add Specific Keywords (Optional)", help="Enter keywords to fine-tune the generated post.")
-    
+
     if st.button("⚡ Generate Post"):
         post = generate_post(selected_length, selected_language, selected_topic, selected_profession, custom_keywords)
         st.write(post)
