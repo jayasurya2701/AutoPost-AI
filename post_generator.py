@@ -36,51 +36,37 @@ def generate_post(post_length, language, topic, profession, post_reason, custom_
 
     length_str = get_length_str(post_length)
 
-    # ✅ **Dynamically Constructed Prompt Based on Language**
-    if language == "English":
-        prompt = f"""
-        You are a professional LinkedIn post writer. Generate a **highly relevant, structured, and engaging LinkedIn post** based on these details:
-
-        🏆 **Purpose of Post**: {post_reason}
-        💼 **Profession**: {profession}
-        🔹 **Topic**: {topic}
-        📏 **Length**: {length_str}
-        🔑 **Additional Keywords**: {custom_keywords if custom_keywords else "None"}
-        
-        **Post Expectations**:
-        - Ensure the post is **directly related to the purpose of the post**.
-        - Structure the content properly. Example:
-          - If the purpose is **"Completed a Course"**, discuss the learning experience, key takeaways, and future goals.
-          - If the purpose is **"Won a Hackathon"**, describe the project, teamwork, and what was learned.
-        - **No generic content** – it should feel personal, meaningful, and context-aware.
-        - Use an **engaging, professional, and storytelling tone**.
-
-        Generate only the LinkedIn post content, no preambles.
+    # ✅ **Force Groq to Generate Tanglish If Selected**
+    if language == "Tanglish":
+        language_instructions = """
+        - Use **Tanglish**, a mix of Tamil + English written in **English script**.
+        - Examples: 
+          - "Vera level experience! Naan Python la oru **next step eduthuten**."
+          - "Job interview romba **challenging** but kandippa worth irundhuchu."
+        - Do not fully write in Tamil. Maintain a smooth mix.
         """
-
-    elif language == "Tanglish":
-        prompt = f"""
-        You are a professional **Tanglish LinkedIn post writer** (Tanglish = Tamil + English written in **English script**).  
-        Generate a **highly relevant, structured, and engaging LinkedIn post** based on these details:
-
-        🏆 **Post Purpose**: {post_reason}
-        💼 **Profession**: {profession}
-        🔹 **Topic**: {topic}
-        📏 **Length**: {length_str}
-        🔑 **Additional Keywords**: {custom_keywords if custom_keywords else "None"}
-
-        **Tanglish Post Expectations**:
-        - **Tanglish format** should mix Tamil and English **NATURALLY** in English script.
-        - **DO NOT give pure English posts.**  
-        - Structure the content properly. Example:
-          - If the purpose is **"Completed a Course"**, describe what you learned, experience, and excitement in Tanglish.
-          - If the purpose is **"Landed a New Job"**, express happiness, journey, and future goals in a **casual & engaging** way.
-        - Use **Tamil emotions, expressions, and slang** for a natural feel.
-        - **Generate only the LinkedIn post content, no preambles.**
-        """
-
     else:
-        return "⚠️ Error: Invalid language selection!"
+        language_instructions = "- Use **English only** for professional LinkedIn writing."
+
+    # ✅ **Dynamically Constructed Prompt Based on User Input**
+    prompt = f"""
+    You are a professional LinkedIn post writer. Generate a **highly relevant, structured, and engaging LinkedIn post** based on these details:
+
+    🏆 **Purpose of Post**: {post_reason}
+    💼 **Profession**: {profession}
+    🔹 **Topic**: {topic}
+    📏 **Length**: {length_str}
+    🔑 **Additional Keywords**: {custom_keywords if custom_keywords else "None"}
+    
+    **Post Expectations**:
+    - Ensure the post is **directly related to the purpose of the post**.
+    - Structure the content properly.
+    - Avoid generic content. It should be **unique and tailored to the user**.
+    
+    {language_instructions}
+
+    Generate only the LinkedIn post content, no preambles.
+    """
 
     try:
         # ✅ **Generate post using LLM**
