@@ -329,6 +329,75 @@ post_purposes = [
     "Asking My Network a Thought-Provoking Question",
     "Highlighting an Underrated Industry Trend",
     "Thanking Someone for Their Help",
+
+    #✅ Daily Thoughts & Reflections
+    "Thought of the Day: A Lesson I Learned Recently",
+    "A Quote That Changed My Perspective",
+    "An Unexpected Insight from My Daily Routine",
+    "A Simple Habit That Changed My Life",
+    "A Small Action That Led to Big Results",
+    "Lessons from a Random Conversation I Had Today",
+    "If I Could Go Back in Time, I’d Tell Myself This",
+
+    #✅ Personal Milestones & Achievements
+    "Reflecting on My Journey So Far",
+    "One Year Ago vs. Today: My Progress",
+    "A Major Setback That Turned Into an Opportunity",
+    "Celebrating a Small but Meaningful Win",
+    "The Most Unexpected Achievement in My Career",
+    "A Personal Breakthrough I Had Recently",
+
+    #✅ Unexpected Moments & Life Incidents
+    "A Random Act of Kindness That Made My Day",
+    "A Surprising Conversation That Changed My Perspective",
+    "An Interesting Stranger I Met Today",
+    "A Situation That Reminded Me of the Power of Gratitude",
+    "Something That Happened Today That Made Me Smile",
+    "A Life Lesson I Learned from an Unplanned Event",
+    "That One Email/Message That Brightened My Day",
+
+    #✅ Curiosity & Thought-Provoking Topics
+    "An Interesting Idea I Came Across Today",
+    "A ‘What If’ Scenario That Got Me Thinking",
+    "A Controversial Opinion I Want to Discuss",
+    "If You Could Change One Thing About the World, What Would It Be?",
+    "A Common Myth People Need to Stop Believing",
+    "What Would You Do If You Had Unlimited Time and Money?",
+    "A Powerful Question That Made Me Reflect on My Life",
+
+    #✅ Lessons from Failures & Challenges
+    "A Time I Took a Big Risk – and What Happened",
+    "Why My First Attempt at Something Was a Disaster",
+    "How I Dealt with Unexpected Criticism",
+    "A Time I Had to Overcome Fear & Self-Doubt",
+    "The Hardest Lesson I’ve Learned the Hard Way",
+    "What a Tough Conversation Taught Me About Communication",
+    "A Recent Mistake That Ended Up Teaching Me a Lot",
+
+    #✅ Everyday Observations & Social Topics
+    "Something I Noticed That Most People Ignore",
+    "A Trend That’s Slowly Taking Over",
+    "An Interesting Pattern I See in People’s Behavior",
+    "A Common Mistake I See People Making Every Day",
+    "The One Thing I Wish More People Paid Attention To",
+    "A Random Event That Left Me Thinking",
+
+    #✅ Unpopular Opinions & Rethinking Norms
+    "A Widely Accepted Belief That I Disagree With",
+    "Why I No Longer Believe in ‘Hustle Culture’",
+    "What Most People Get Wrong About Success",
+    "A Career Advice That I Think is Outdated",
+    "Why Hard Work Alone Isn’t Enough",
+    "Something I Used to Believe, But Changed My Mind About",
+
+    #✅ Notable World Events & Reactions
+    "A Recent Global Event That Caught My Attention",
+    "Something Happening in the World That We Should Talk About",
+    "A Technological Breakthrough That Could Change Everything",
+    "An Underrated News Story That Deserves More Attention",
+    "What This Year's Biggest Trends Tell Us About the Future",
+    "A Policy Change That Could Impact Everyone",
+    
 ]
 
 # Post Length & Language Options
