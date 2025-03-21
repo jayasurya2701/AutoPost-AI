@@ -63,24 +63,62 @@ professions = {
         }
     },
     "Healthcare & Medicine": {
-        "Doctors & Physicians": {
-            "General Practitioner": ["Diagnosis", "Patient Care", "Primary Health","General Thoughts"],
-            "Surgeon": ["Surgical Innovations", "Medical Robotics","General Thoughts"],
-            "Cardiologist": ["Heart Health", "Clinical Trials","General Thoughts"],
-            "Neurologist": ["Brain Research", "Mental Health","General Thoughts"],
-            "Oncologist": ["Cancer Research", "Precision Medicine","General Thoughts"]
-        },
-        "Healthcare Technology": {
-            "Medical AI Researcher": ["AI in Healthcare", "Medical Imaging AI","General Thoughts"],
-            "Telemedicine Specialist": ["Remote Consultations", "eHealth","General Thoughts"],
-            "Biomedical Engineer": ["Medical Devices", "Prosthetics","General Thoughts"],
-            "Pharmacovigilance Expert": ["Drug Safety", "Clinical Trials","General Thoughts"]
-        },
-        "Mental Health & Wellness": {
-            "Psychologist": ["Therapy", "Mental Health Awareness","General Thoughts"],
-            "Psychiatrist": ["Neuropharmacology", "Cognitive Science","General Thoughts"]
-        }
+    "Doctors & Physicians": {
+        "General Practitioner": ["Diagnosis", "Patient Care", "Primary Health", "General Thoughts"],
+        "Surgeon": ["Surgical Innovations", "Minimally Invasive Surgery", "Medical Robotics"],
+        "Cardiologist": ["Heart Health", "Cardiac Treatments", "Clinical Trials"],
+        "Neurologist": ["Brain Research", "Mental Health", "Neurodegenerative Diseases"],
+        "Oncologist": ["Cancer Research", "Chemotherapy Innovations", "Precision Medicine"],
+        "Endocrinologist": ["Diabetes Management", "Hormonal Disorders", "Metabolism"],
+        "Dermatologist": ["Skincare", "Cosmetic Treatments", "Skin Cancer Detection"],
+        "Gastroenterologist": ["Gut Health", "Digestive Disorders", "Endoscopic Procedures"],
+        "Pulmonologist": ["Lung Health", "Respiratory Therapy", "Asthma & COPD"],
+        "Nephrologist": ["Kidney Diseases", "Dialysis", "Transplantation"],
+        "Hematologist": ["Blood Disorders", "Leukemia Research", "Stem Cell Therapy"],
+        "Rheumatologist": ["Autoimmune Diseases", "Joint Disorders", "Arthritis"],
+        "Ophthalmologist": ["Eye Health", "LASIK Surgery", "Glaucoma Treatment"],
+        "Otolaryngologist (ENT)": ["Hearing Disorders", "Sinus Treatment", "Voice Therapy"],
+        "Urologist": ["Urinary Health", "Prostate Treatment", "Bladder Disorders"],
+        "Orthopedic Surgeon": ["Bone Health", "Joint Replacements", "Sports Medicine"],
+        "Plastic Surgeon": ["Reconstructive Surgery", "Aesthetic Procedures", "Burn Treatments"],
+        "Psychiatrist": ["Mental Health", "Depression & Anxiety Treatment", "Psychotherapy"],
+        "Pediatrician": ["Child Health", "Vaccination", "Neonatal Care"],
+        "Geriatrician": ["Elderly Care", "Dementia Management", "Aging & Longevity"],
+        "Obstetrician & Gynecologist": ["Pregnancy Care", "Women's Health", "Fertility Treatments"],
+        "Anesthesiologist": ["Pain Management", "Surgical Anesthesia", "Critical Care"],
+        "Emergency Medicine Physician": ["Trauma Care", "Emergency Response", "Critical Care"],
+        "Pathologist": ["Disease Diagnosis", "Forensic Pathology", "Laboratory Medicine"]
     },
+    "Rehabilitation & Physical Medicine": {
+        "Physiotherapist": ["Rehabilitation", "Injury Recovery", "Pain Management"],
+        "Chiropractor": ["Spinal Health", "Posture Correction", "Joint Mobilization"],
+        "Occupational Therapist": ["Workplace Ergonomics", "Disability Support", "Motor Skills"],
+        "Sports Medicine Specialist": ["Athlete Recovery", "Performance Optimization", "Injury Prevention"],
+        "Speech Therapist": ["Speech Disorders", "Language Development", "Voice Therapy"],
+        "Respiratory Therapist": ["Lung Rehabilitation", "Ventilator Management", "COPD Care"]
+    },
+    "Medical Technology & Research": {
+        "Medical AI Researcher": ["AI in Healthcare", "Medical Imaging AI", "AI for Drug Discovery"],
+        "Biomedical Engineer": ["Medical Devices", "Wearable Health Tech", "Prosthetics"],
+        "Geneticist": ["Genetic Disorders", "CRISPR & Gene Editing", "Personalized Medicine"],
+        "Clinical Researcher": ["Drug Trials", "Vaccine Development", "Regulatory Affairs"],
+        "Pharmacologist": ["Drug Safety", "Pharmaceutical Research", "Medication Development"],
+        "Pharmacist": ["Medication Management", "Drug Interactions", "Community Pharmacy"],
+        "Radiologist": ["Medical Imaging", "X-rays & MRI", "Cancer Detection"],
+        "Nuclear Medicine Specialist": ["PET Scans", "Radioactive Therapy", "Cancer Diagnostics"]
+    },
+    "Mental Health & Therapy": {
+        "Psychologist": ["Cognitive Therapy", "Behavioral Health", "Mental Wellness"],
+        "Counselor": ["Therapy & Support", "Crisis Intervention", "Mental Health Advocacy"],
+        "Social Worker": ["Community Health", "Patient Advocacy", "Family Support"]
+    },
+    "Healthcare Administration & Public Health": {
+        "Healthcare Administrator": ["Hospital Management", "Patient Care Optimization", "Healthcare Policy"],
+        "Public Health Specialist": ["Epidemiology", "Disease Prevention", "Health Campaigns"],
+        "Medical Ethicist": ["Bioethics", "Patient Rights", "Ethical Decision-Making"]
+    }
+},
+
     "Engineering & Technology": {
         "Mechanical Engineering": {
             "Automotive Engineer": ["EV Technology", "Autonomous Vehicles","General Thoughts"],
