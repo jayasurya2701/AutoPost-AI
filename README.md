@@ -3,10 +3,11 @@ Write Smarter, Post Faster  🚀
 
 ## 📌 **Overview**  
 
-AutoPost AI is an  **AI-driven LinkedIn post generator**  designed to help professionals, marketers, and businesses create engaging, high-quality content effortlessly. Built with Llama 3, LangChain, and Streamlit, this tool leverages LLM-powered content generation, few-shot learning, and metadata-based topic filtering to craft personalized LinkedIn posts with precise tone, structure, and relevance.
+AutoPost AI is an **AI-driven LinkedIn post generator** designed for professionals, marketers, and businesses to create **engaging, high-quality LinkedIn content effortlessly**.  
 
-With multi-language support, topic-specific customization, and optimized API performance, AutoPost AI ensures that users can generate posts quickly and effectively, making LinkedIn content creation faster, smarter, and more impactful.
+Built with **Llama 3, LangChain, and Streamlit**, this tool leverages **LLM-powered content generation, few-shot learning, and metadata-based topic filtering** to generate posts with **precise tone, structure, and relevance**.
 
+With **Bi-language support, Personal Growth topics, post-purpose selection, and optimized API performance**, AutoPost AI ensures that users can generate content faster, smarter, and more effectively.
 ---
 
 ## ⚡ **Key Features & Capabilities**  
@@ -16,6 +17,10 @@ With multi-language support, topic-specific customization, and optimized API per
 ✅ Few-Shot Learning for Personalization – Learns from real LinkedIn posts to mimic professional writing styles.
 
 ✅ Tanglish (Tamil + English) Language Support – Enables bilingual content while keeping English script clarity.
+
+✅ Smart Industry Categorization – Uses metadata to align posts with **industry-specific** topics.  
+
+✅ New! Personal Growth & Soft Skills Topics – Covers **motivation, networking, leadership, productivity, mental health**, and more!  
 
 ✅ Smart Topic Categorization – Uses metadata extraction to align posts with industry-specific themes.
 
@@ -27,25 +32,26 @@ With multi-language support, topic-specific customization, and optimized API per
 
 ---
 
-## 📊 **Tech Stack**  
+## 📊 Tech Stack  
 
-LLM: Llama 3 (via Groq API)
-
-Frameworks: LangChain, Streamlit
-
-Data Processing: Pandas, JSON
-
-Deployment & Environment Management: Python, dotenv
+| Component  | Technology Used |
+|------------|----------------|
+| **LLM** | Llama 3 (via Groq API) |
+| **Frameworks** | LangChain, Streamlit |
+| **Data Processing** | Pandas, JSON |
+| **Deployment & Environment** | Python, dotenv, Streamlit |
 
 ---
 
 ## 🚀 **How It Works**  
 
-1️⃣ Select a topic, language, and tone.
+1️⃣ **Select** a category, subcategory, profession, topic, and language.  
+
+2️⃣ **Choose the Purpose** of your post (Career, Growth, Industry Insights, etc.).  
 
 2️⃣ AutoPost AI generates a well-structured LinkedIn post using LLM-powered content creation.
 
-3️⃣ Review, refine (if needed), and publish instantly!
+4️⃣ Review, refine (if needed), and publish instantly!
 
 ---
 
@@ -61,29 +67,31 @@ Deployment & Environment Management: Python, dotenv
 
 ---
 
-## 🔗 Try the Live App
+## 🔗 Try the Live App  
 
-🚀 Live Demo on Streamlit : https://autopost-ai.streamlit.app/
-
----
-
-## 🔑 API Key Setup (Groq Cloud)
-To access Llama 3 via the Groq API, create your own LLM API key using Groq Cloud:
-
-1️⃣ Sign up on Groq Cloud and create an account.
-
-2️⃣ Navigate to the API Keys section and generate a new key.
-
-3️⃣ Store the API key in a particular place to use it   
-
-4️⃣ You're ready to run the app and start generating LinkedIn posts! 🚀
+🚀 **Live Demo on Streamlit**: [AutoPost AI](https://autopost-ai.streamlit.app/)  
 
 ---
 
-### **Run the Application:**  
-To start using AutoPost AI, **run the following command:**  
+## 🔑 API Key Setup (Groq Cloud)  
+
+To access **Llama 3 via the Groq API**, generate an API key:  
+
+1️⃣ **Sign up** on [Groq Cloud](https://groq.com/) & create an account.  
+
+2️⃣ **Navigate** to the API Keys section and **generate a new key**.  
+
+3️⃣ **Store** the API key securely for use in the app.  
+
+4️⃣ **Run AutoPost AI & start generating LinkedIn posts instantly!** 🚀  
+
+---
+
+## 🛠️ Run the Application  
+
+To start using **AutoPost AI**, run the following command:  
 
 ```bash
 python main.py
 
-This will launch the Streamlit UI, where you can generate LinkedIn posts instantly!
+###This will launch the Streamlit UI, where you can generate LinkedIn posts instantly!
