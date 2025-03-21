@@ -307,10 +307,10 @@ def main():
         st.session_state["selected_category"] = next(iter(professions.keys()))
 
     if "selected_subcategory" not in st.session_state:
-        st.session_state["selected_subcategory"] = next(iter(professions[st.session_state["selected_category"]].keys()))
+        st.session_state["selected_subcategory"] = ""
 
     if "selected_profession" not in st.session_state:
-        st.session_state["selected_profession"] = next(iter(professions[st.session_state["selected_category"]][st.session_state["selected_subcategory"]].keys()))
+        st.session_state["selected_profession"] = ""
 
     # 🔹 **User-Friendly Horizontal Layout**
     col1, col2, col3 = st.columns(3)
@@ -335,12 +335,16 @@ def main():
         with col5:
             custom_keywords = st.text_input("🔑 Add Specific Keywords (Optional)", help="Enter keywords to fine-tune the generated post.")
 
+        # Select Purpose
+        selected_purpose = st.selectbox("🎯 Select Purpose of Post:", options=post_purposes)
+
         # Generate Post Button
         if st.button("⚡ Generate Post"):
-            post = generate_post(selected_length, selected_language, selected_topic, "Personal Growth", custom_keywords)
+            post = generate_post(selected_length, selected_language, selected_topic, selected_purpose, custom_keywords)
             st.write(post)
         return  # Exit function early since subcategory/profession is not needed
 
+    # **For other categories (Technical, Business, etc.)**
     with col2:
         subcategories = list(professions[selected_category].keys())  
         selected_subcategory = st.selectbox(
@@ -364,7 +368,7 @@ def main():
 
     with col4:
         topics = professions[selected_category][selected_subcategory].get(selected_profession, ["General Thoughts"])
-        selected_topic = st.selectbox("🎯 Select a Discussion Topic (Optional):", options=topics)
+        selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
 
     with col5:
         selected_language = st.selectbox("📝 Select Language:", options=language_options)
