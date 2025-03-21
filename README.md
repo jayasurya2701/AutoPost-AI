@@ -9,8 +9,6 @@ Built with **Llama 3, LangChain, and Streamlit**, this tool leverages **LLM-powe
 
 With **Bi-language support, Personal Growth topics, post-purpose selection, and optimized API performance**, AutoPost AI ensures that users can generate content faster, smarter, and more effectively.
 
----
-
 ## ⚡ **Key Features & Capabilities**  
 
 ✅ AI-Powered Content Generation – Generate LinkedIn posts by specifying a topic, language, and length.
