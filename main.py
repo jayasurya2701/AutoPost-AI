@@ -323,6 +323,24 @@ def main():
         )
         st.session_state["selected_category"] = selected_category
 
+    # **Handling "Personal Growth" category separately**
+    if selected_category == "Personal Growth":
+        topics = list(professions[selected_category].keys())
+        selected_topic = st.selectbox("🎯 Select a Discussion Topic:", options=topics)
+        selected_language = st.selectbox("📝 Select Language:", options=language_options)
+
+        col4, col5 = st.columns([1, 3])
+        with col4:
+            selected_length = st.radio("📏 Select Post Length:", options=length_options, horizontal=True)
+        with col5:
+            custom_keywords = st.text_input("🔑 Add Specific Keywords (Optional)", help="Enter keywords to fine-tune the generated post.")
+
+        # Generate Post Button
+        if st.button("⚡ Generate Post"):
+            post = generate_post(selected_length, selected_language, selected_topic, "Personal Growth", custom_keywords)
+            st.write(post)
+        return  # Exit function early since subcategory/profession is not needed
+
     with col2:
         subcategories = list(professions[selected_category].keys())  
         selected_subcategory = st.selectbox(
