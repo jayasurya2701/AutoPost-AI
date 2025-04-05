@@ -406,7 +406,7 @@ language_options = ["English", "Tanglish"]
 
 def main():
     """Main function to render the Streamlit app."""
-    st.subheader("🚀 LinkedIn Post Generator")
+    st.subheader("🚀 AutoPost-AI - An AI Powered LinkedIn Post Generator")
     fs = FewShotPosts()
 
     # Ensure session state has valid keys
