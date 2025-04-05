@@ -8,14 +8,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Sidebar for API Key input (hidden)
-st.sidebar.header("🔐 Enter LLM API Key")
-user_api_key = st.sidebar.text_input("API Key", type="password")
+#st.sidebar.header("🔐 Enter LLM API Key")
+#user_api_key = st.sidebar.text_input("API Key", type="password")
 
-if user_api_key:
-    os.environ["GROQ_API_KEY"] = user_api_key
-    st.sidebar.success("✅ API Key Set Successfully!")
-else:
-    st.sidebar.warning("⚠️ Please enter your API key to generate posts.")
+#if user_api_key:
+    #os.environ["GROQ_API_KEY"] = user_api_key
+    #st.sidebar.success("✅ API Key Set Successfully!")
+#else:
+    #st.sidebar.warning("⚠️ Please enter your API key to generate posts.")
 
 # 🏆 Profession categories & topics
 professions = {
